@@ -1,0 +1,12 @@
+name: ideprj-alb32rtsdk
+owner: alb
+version: 1.0.0
+description: Prebuilt IDE Projects for ALB32RT SDK
+type: ideprj
+keywords:
+  - risc-v
+license: MIT
+homepage: http://www.albsemi.com/
+
+pathvars:
+  - ALB32_FW_PATH=ALB32RT_SDK

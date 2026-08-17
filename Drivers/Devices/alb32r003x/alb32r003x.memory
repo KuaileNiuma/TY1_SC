@@ -1,0 +1,83 @@
+/**
+ *************************************************************************************
+ * @file alb32r003x.memory
+ * @author Albatross
+ * @brief
+ * @version 1.0.0
+ * @date 2025-07-30
+ *************************************************************************************
+ * @copyright Copyright (c) 2025 Albatross Semiconductor(Hangzhou) Co.,Ltd.
+ * BSD-3-Clause License
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ *    list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ * 3. Neither the name of the copyright holder nor the names of its
+ *    contributors may be used to endorse or promote products derived from
+ *    this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ ************************************************************************************
+ */
+
+
+/* *_MEMROY_SIZE must be numerical only such as 0x10000 or 65536 */
+
+/* ILM Memory Information */
+ILM_MEMORY_PRESENT = 1;
+ILM_MEMORY_BASE = 0x02000000;
+ILM_MEMORY_SIZE = 0x20000;
+
+/* DLM Memory Information */
+DLM_MEMORY_PRESENT = 1;
+DLM_MEMORY_BASE = 0x03000000;
+DLM_MEMORY_SIZE = 0x20000;
+
+/* eFlash Memory Information */
+FLASH_MEMORY_PRESENT = 1;
+FLASH_MEMORY_BASE = 0x0FF70000;
+FLASH_MEMORY_SIZE = 0x80000;
+
+/* xFlash Zero Wait Memory Information */
+XFLASHZ_MEMORY_PRESENT = 1;
+XFLASHZ_MEMORY_BASE = 0x0FFF0000;
+XFLASHZ_MEMORY_SIZE = 0x10000;
+
+/* xFlash Wait Memory Information */
+XFLASH_MEMORY_PRESENT = 1;
+XFLASH_MEMORY_BASE = 0x10000000;
+XFLASH_MEMORY_SIZE = 0x10770000;
+
+/* QSpiFlash Memory Information ， qspi flash*/
+QFLASH_MEMORY_PRESENT = 1;
+QFLASH_MEMORY_BASE = 0x30000000;
+QFLASH_MEMORY_SIZE = 0x800000;
+
+/* SpiFlash Memory Information */
+XFLASH_MEMORY_PRESENT = 1;
+XFLASH_MEMORY_BASE = 0x10000000;
+XFLASH_MEMORY_SIZE = 8*1024*1024-0x10000;
+
+/* SRAM Memory Information */
+SRAM_MEMORY_PRESENT = 1;
+SRAM_MEMORY_BASE = 0x18000000;
+SRAM_MEMORY_SIZE = 0x40000;
+/* SRAM_MEMORY_ROM_SIZE must be smaller than SRAM_MEMORY_SIZE */
+SRAM_MEMORY_ROM_SIZE = 0x10000;
+

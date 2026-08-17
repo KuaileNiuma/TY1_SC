@@ -1,0 +1,24 @@
+# --- ALB32RT SDK: build output ---
+# Eclipse/gcc 构建输出目录(无源码,可随时重建)
+onSRAM/
+onILM/
+onFlash/
+
+# 构建产物
+*.o
+*.d
+*.elf
+*.map
+*.lst
+*.hex
+
+# 固件镜像(保留随 SDK 发布的 loader_flash.bin)
+*.bin
+!Utilities/Scripts/loader_flash.bin
+
+# core dump
+core.*
+
+# IDE 临时文件
+*.swp
+.DS_Store
