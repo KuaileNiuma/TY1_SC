@@ -508,7 +508,7 @@ void OptionBytes_init()
 
 void alb32r003x_evb_init()
 {
-	SystemClock_Set180MHz( OSCSRC_HSI);
+	SystemClock_Set180MHz( OSCSRC_HSE);
     /* configure USART */
     evb_com_init(EVB_COM_UART);
     /* configure OptionBytes */
