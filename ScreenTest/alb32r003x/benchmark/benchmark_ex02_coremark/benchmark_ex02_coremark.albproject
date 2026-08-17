@@ -1,0 +1,19 @@
+SDK_CONFIG: 
+   onILM: 
+      core: R3
+      extra_asmflags: 
+      archext: 
+      extra_cxxflags: 
+      mtune: default
+      cmodel: medlow
+      extra_commonflags: '-fno-code-hoisting -fno-tree-vectorize -fno-common -finline-functions -falign-functions=4
+         -falign-jumps=4 -falign-loops=4 -finline-limit=200 -fno-if-conversion -fno-if-conversion2 -fipa-pta
+         -fselective-scheduling -fno-tree-loop-distribute-patterns -funroll-loops -funroll-all-loops -fno-delete-null-pointer-checks
+         -fno-rename-registers -mbranch-cost=1 --param fsm-scale-path-stmts=5 --param max-average-unrolled-insns=200
+         --param max-grow-copy-bb-insns=20 --param max-jump-thread-duplication-stmts=25 --param hot-bb-frequency-fraction=4
+         --param unroll-jam-min-percent=0 -DITERATIONS=10000 -DPERFORMANCE_RUN=1 '
+      abi: ilp32f
+      arch: rv32imaf_zicond_zba_zbb_zbc_zbs_zicbom_zicboz_zicbop_zca_zcb_zcf_zcmp_zcmt_xxldsp
+      toolchain: gnu
+      extra_cflags: 
+      extra_ldflags: -Wl,--check-sections -Wl,--no-warn-rwx-segments  -u errno

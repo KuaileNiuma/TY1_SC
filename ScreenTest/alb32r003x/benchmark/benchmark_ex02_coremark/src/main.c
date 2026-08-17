@@ -184,8 +184,11 @@ static int flash_full_erase_write_test(void)
 
     FLASH_unlock();
     FLASH_readUnlock();
+    FLASH_CDC_unlock();
     FLASH_clearFlag(EFLASH_SR_EOP | EFLASH_SR_OPERR | EFLASH_SR_WRPERR |
                     EFLASH_SR_PGAERR | EFLASH_SR_PGPERR | EFLASH_SR_PGSERR);
+
+    FLASH_CDC_program(0, 0x80000, 0x60BA, 0x6C787878, 0x925860F0, 0x3C00A8C0, 0x7801A5E0);
 
     /* Step 1: erase all user sectors (full coverage) */
     for (sector = EFLASH_Sector_8; sector <= EFLASH_Sector_11; sector++)
@@ -265,10 +268,7 @@ int main(void)
 	/* Enable all peripheral clocks (test requirement) */
 	RCC_EnableAllPeripheralClocks();
 
-	/* FLASH full-coverage erase/write test (runs from ILM, safe to erase flash) */
-	flash_full_erase_write_test();
-
-	printf("ALB32R003x CoreMark!\r\n");
+	printf("--------ALB32R003x CoreMark!--------\r\n");
 	printf("Core running @ %d MHz\r\n", SystemClock_Get()/1000/1000);
 	printf("Code: 0x%08X, Data: 0x%08X\r\n", (uint32_t)main_coremark, (uint32_t)&ram);
 
@@ -279,6 +279,10 @@ int main(void)
 	main_coremark();
 	instret = __get_rv_instret() - instret;
 	printf("instret in main_coremark: %u\n\n", (uint32_t)instret);
+
+	printf("--------ALB32R003x Flash test!--------\r\n");
+	/* FLASH full-coverage erase/write test (runs from ILM, safe to erase flash) */
+	flash_full_erase_write_test();
 
 	for(;;);
 
