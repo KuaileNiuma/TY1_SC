@@ -37,6 +37,7 @@
 #include <stdio.h>
 #include "alb32r003x_evb.h"
 #include "device.h"
+#include "eflashc.h"
 
 
 extern int main_coremark(void);
@@ -144,12 +145,129 @@ static void RCC_EnableAllPeripheralClocks(void)
     RCC_APBL2PeriphClockCmd(GPIO5_CLK_EN, ENABLE);
 }
 
+//*****************************************************************************
+//
+// FLASH full-coverage erase/write test
+//
+// The current onILM build runs entirely from ILM/DLM SRAM, so the whole
+// user flash area can be erased and rewritten safely at runtime.
+//
+// !!! WARNING !!!
+// This test erases the ENTIRE user flash (sectors 8..11). It MUST only be
+// used in onILM/onSRAM builds. Never enable it in the onFlashILM/onFlash
+// configurations, otherwise it will erase the running program itself.
+//
+// User flash layout (ALB32R003x):
+//   EFLASH_BASE  = 0x0FF70000 (Sector 8)
+//   4 sectors x 128KB = 512KB total (Sectors 8, 9, 10, 11)
+//
+//*****************************************************************************
+#define FLASH_TEST_START_ADDR     (EFLASH_BASE)                    //!< User flash base (Sector 8)
+#define FLASH_TEST_END_ADDR       (EFLASH_BASE + 0x80000U)         //!< End of user flash (Sector 11 + 128KB)
+#define FLASH_TEST_PATTERN_BASE   0x5A5AA5A5U                      //!< Base pattern
+
+/**
+ * @brief Erase / program / verify the whole user flash area (full coverage)
+ * @return 0 on success, non-zero on failure
+ */
+static int flash_full_erase_write_test(void)
+{
+    uint32_t addr;
+    uint32_t pattern;
+    uint16_t sector;
+    int error = 0;
+
+    printf("FLASH full-coverage erase/write test start.\r\n");
+    printf("Region: 0x%08X - 0x%08X (%u KB)\r\n",
+           FLASH_TEST_START_ADDR, FLASH_TEST_END_ADDR - 1U,
+           (FLASH_TEST_END_ADDR - FLASH_TEST_START_ADDR) / 1024U);
+
+    FLASH_unlock();
+    FLASH_readUnlock();
+    FLASH_clearFlag(EFLASH_SR_EOP | EFLASH_SR_OPERR | EFLASH_SR_WRPERR |
+                    EFLASH_SR_PGAERR | EFLASH_SR_PGPERR | EFLASH_SR_PGSERR);
+
+    /* Step 1: erase all user sectors (full coverage) */
+    for (sector = EFLASH_Sector_8; sector <= EFLASH_Sector_11; sector++)
+    {
+        FLASH_eraseSector(sector);
+    }
+
+    /* Step 2: verify all sectors are erased (0xFFFFFFFF) */
+    for (addr = FLASH_TEST_START_ADDR; addr < FLASH_TEST_END_ADDR; addr += 4U)
+    {
+        if (*(__IO uint32_t *)addr != 0xFFFFFFFFU)
+        {
+            printf("  Erase verify FAIL at 0x%08X (0x%08X)\r\n",
+                   addr, *(__IO uint32_t *)addr);
+            error++;
+            break;
+        }
+    }
+
+    /* Step 3: program the whole user flash with an incrementing pattern */
+    if (error == 0)
+    {
+        for (addr = FLASH_TEST_START_ADDR; addr < FLASH_TEST_END_ADDR; addr += 4U)
+        {
+            pattern = FLASH_TEST_PATTERN_BASE + (addr - FLASH_TEST_START_ADDR);
+            FLASH_program((uint8_t *)&pattern, addr, FLASH_PSIZE_WORD);
+        }
+
+        /* Step 4: verify programmed data (full coverage) */
+        for (addr = FLASH_TEST_START_ADDR; addr < FLASH_TEST_END_ADDR; addr += 4U)
+        {
+            pattern = FLASH_TEST_PATTERN_BASE + (addr - FLASH_TEST_START_ADDR);
+            if (*(__IO uint32_t *)addr != pattern)
+            {
+                printf("  Program verify FAIL at 0x%08X (0x%08X)\r\n",
+                       addr, *(__IO uint32_t *)addr);
+                error++;
+                break;
+            }
+        }
+    }
+
+    /* Step 5: erase again, leaving the user flash in erased state */
+    for (sector = EFLASH_Sector_8; sector <= EFLASH_Sector_11; sector++)
+    {
+        FLASH_eraseSector(sector);
+    }
+
+    /* Step 6: verify erased again */
+    for (addr = FLASH_TEST_START_ADDR; addr < FLASH_TEST_END_ADDR; addr += 4U)
+    {
+        if (*(__IO uint32_t *)addr != 0xFFFFFFFFU)
+        {
+            printf("  Re-erase verify FAIL at 0x%08X\r\n", addr);
+            error++;
+            break;
+        }
+    }
+
+    FLASH_lock();
+
+    if (error == 0)
+    {
+        printf("FLASH full-coverage erase/write test PASS.\r\n");
+    }
+    else
+    {
+        printf("FLASH full-coverage erase/write test FAIL.\r\n");
+    }
+    return error;
+}
+
 int main(void)
 {
 	uint8_t ram;
 	alb32r003x_evb_init();
 	/* Enable all peripheral clocks (test requirement) */
 	RCC_EnableAllPeripheralClocks();
+
+	/* FLASH full-coverage erase/write test (runs from ILM, safe to erase flash) */
+	flash_full_erase_write_test();
+
 	printf("ALB32R003x CoreMark!\r\n");
 	printf("Core running @ %d MHz\r\n", SystemClock_Get()/1000/1000);
 	printf("Code: 0x%08X, Data: 0x%08X\r\n", (uint32_t)main_coremark, (uint32_t)&ram);
