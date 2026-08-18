@@ -39,7 +39,7 @@
 
 #include "device.h"
 
-#define myCAN_BASE	CANFD1_BASE
+#define myCAN_BASE	CANFD2_BASE
 
 #if (myCAN_BASE == CANFD1_BASE)
 #define myCAN_RX_PIN	GPIO_5_CANA_RX
@@ -47,7 +47,7 @@
 #define myCAN_CLK_EN	SYSCTL_PERIPH_CLK_CANFD1
 #define myCAN_IRQn      CANFD1_IRQn
 
-#elif	(myCAN_BASE == CANFD1_BASE)
+#elif	(myCAN_BASE == CANFD2_BASE)
 #define myCAN_RX_PIN	GPIO_5_CANB_RX
 #define myCAN_TX_PIN	GPIO_4_CANB_TX
 #define myCAN_CLK_EN	SYSCTL_PERIPH_CLK_CANFD2

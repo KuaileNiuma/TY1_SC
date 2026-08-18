@@ -1,7 +1,7 @@
 /**
  *************************************************************************************
- * @file can_ex01_loopback.h
- * @brief This file contains the header file for example can_ex01_loopback.
+ * @file canfd_ex03_loopback.h
+ * @brief This file contains the header file for example canfd_ex03_loopback.
  * @version 1.0.0
  *************************************************************************************
  * @copyright Copyright (c) 2025 Albatross Semiconductor(Hangzhou) Co.,Ltd.
@@ -34,12 +34,12 @@
  ************************************************************************************
  */
 
-#ifndef __CAN_EX01_LOOPBACK_H
-#define __CAN_EX01_LOOPBACK_H
+#ifndef __CANFD_EX03_LOOPBACK_H
+#define __CANFD_EX03_LOOPBACK_H
 
 #include "device.h"
 
-#define myCAN_BASE	CANFD1_BASE
+#define myCAN_BASE	CANFD2_BASE
 
 #if (myCAN_BASE == CANFD1_BASE)
 #define myCAN_RX_PIN	GPIO_5_CANA_RX

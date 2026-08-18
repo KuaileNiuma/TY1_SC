@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>canfd_ex03_loopback</name>
+	<name>can1_fd_loopback</name>
 	<comment></comment>
 	<projects>
 	</projects>
