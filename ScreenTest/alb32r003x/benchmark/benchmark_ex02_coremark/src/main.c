@@ -183,6 +183,7 @@ static int flash_full_erase_write_test(void)
            (FLASH_TEST_END_ADDR - FLASH_TEST_START_ADDR) / 1024U);
 
     FLASH_unlock();
+    FLASH_OB_unlock();
     FLASH_readUnlock();
     FLASH_CDC_unlock();
     FLASH_clearFlag(EFLASH_SR_EOP | EFLASH_SR_OPERR | EFLASH_SR_WRPERR |
