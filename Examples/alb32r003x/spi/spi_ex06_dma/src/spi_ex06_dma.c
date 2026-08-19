@@ -43,15 +43,15 @@
 // Macros & Typedefs
 //
 //*****************************************************************************
-#define TEST_DATA_COUNT		16                          //!< Data length for UART transmission
+#define TEST_DATA_COUNT		64                          //!< Data length for UART transmission
 
 //*****************************************************************************
 //
 // Global Variables
 //
 //*****************************************************************************
-uint8_t readBuffer[TEST_DATA_COUNT] = {0};    //!< Buffer to store data read from FLASH
-uint8_t writeBuffer[TEST_DATA_COUNT] = {0};   //!< Buffer to store data to write to FLASH
+uint32_t readBuffer[TEST_DATA_COUNT] = {0};    //!< Buffer to store data read from FLASH
+uint32_t writeBuffer[TEST_DATA_COUNT] = {0};   //!< Buffer to store data to write to FLASH
 
 
 //*****************************************************************************
@@ -96,7 +96,7 @@ static void spi_tx_dma_init(void)
     //
     //Turn on the DMA1 & DMASCH peripheral clock
     //
-    DMA_disableModule(DMA1_CH1_BASE);
+//    DMA_disableModule(DMA1_CH1_BASE);
     DMA_stopChannel(DMA1_CH1_BASE);
     DMA_DeConfChannel(DMA1_CH1_BASE);
     DMA_disableInterrupt(DMA1_CH1_BASE);
@@ -104,7 +104,7 @@ static void spi_tx_dma_init(void)
     // Set up DMA transfer parameters
     //
     dmaCfg.enableInterrupt = 0;
-    dmaCfg.blockTS = 16;
+    dmaCfg.blockTS = TEST_DATA_COUNT;
     dmaCfg.ttfc = DMA_TT_FC_1_M2P_DMAC;
     dmaCfg.dmaDstReqId = DMAMUX_ReqId_dma_SPI1_TX;
     dmaCfg.srcAddr = (uint32_t) writeBuffer;
@@ -144,7 +144,7 @@ static void spi_rx_dma_init(void)
     //
     //Turn on the DMA1 & DMASCH peripheral clock
     //
-    DMA_disableModule(DMA1_CH2_BASE);
+//    DMA_disableModule(DMA1_CH2_BASE);
     DMA_stopChannel(DMA1_CH2_BASE);
     DMA_DeConfChannel(DMA1_CH2_BASE);
     DMA_disableInterrupt(DMA1_CH2_BASE);
@@ -152,7 +152,7 @@ static void spi_rx_dma_init(void)
     // Set up DMA transfer parameters
     //
     dmaCfg.enableInterrupt = 0;
-    dmaCfg.blockTS = 16;
+    dmaCfg.blockTS = TEST_DATA_COUNT;
     dmaCfg.ttfc = DMA_TT_FC_2_P2M_DMAC;
     dmaCfg.dmaSrcReqId = DMAMUX_ReqId_dma_SPI1_RX;
     dmaCfg.srcAddr = (uint32_t)(SPI1_BASE + SPI_O_DATAREG);
@@ -200,10 +200,11 @@ int main(void)
 	 //
 	 // Configure DMA for UART transmission and reception
 	 //
+	 spi_rx_dma_init();
 	 spi_tx_dma_init();
 	 while((DMA_getRawInterruptStatus(DMA1_CH1_BASE) & DMA_INT_TFR) == 0);
-	 spi_rx_dma_init();
 	 while((DMA_getRawInterruptStatus(DMA1_CH2_BASE) & DMA_INT_TFR) == 0);
+
 
 
 

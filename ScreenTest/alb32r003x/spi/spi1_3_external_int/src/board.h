@@ -93,34 +93,34 @@ extern "C"
 #define SPIA_peripheral_SPISTE_PIN_CONFIG GPIO_0_SPIA_STE //!< SPIA STE pin configuration
 
 //
-// SPIB -> SPIB_controller Pinmux
+// SPIC -> SPIC_controller Pinmux
 //
-// SPIB_SIMO - GPIO Settings
+// SPIC_SIMO - GPIO Settings
 //
-#define GPIO_PIN_SPIB_SIMO 7                                 //!< SPIB SIMO pin number
-#define SPIB_controller_SPISIMO_GPIO 7                       //!< SPIB SIMO GPIO number
-#define SPIB_controller_SPISIMO_PIN_CONFIG GPIO_7_SPIC_SIMO   //!< SPIB SIMO pin configuration
+#define GPIO_PIN_SPIC_SIMO 7                                 //!< SPIC SIMO pin number
+#define SPIC_controller_SPISIMO_GPIO 7                       //!< SPIC SIMO GPIO number
+#define SPIC_controller_SPISIMO_PIN_CONFIG GPIO_7_SPIC_SIMO   //!< SPIC SIMO pin configuration
 
 //
-// SPIB_SOMI - GPIO Settings
+// SPIC_SOMI - GPIO Settings
 //
-#define GPIO_PIN_SPIB_SOMI 6                                 //!< SPIB SOMI pin number
-#define SPIB_controller_SPISOMI_GPIO 6                       //!< SPIB SOMI GPIO number
-#define SPIB_controller_SPISOMI_PIN_CONFIG GPIO_6_SPIC_SOMI   //!< SPIB SOMI pin configuration
+#define GPIO_PIN_SPIC_SOMI 6                                 //!< SPIC SOMI pin number
+#define SPIC_controller_SPISOMI_GPIO 6                       //!< SPIC SOMI GPIO number
+#define SPIC_controller_SPISOMI_PIN_CONFIG GPIO_6_SPIC_SOMI   //!< SPIC SOMI pin configuration
 
 //
-// SPIB_CLK - GPIO Settings
+// SPIC_CLK - GPIO Settings
 //
-#define GPIO_PIN_SPIB_CLK 14                                //!< SPIB CLK pin number
-#define SPIB_controller_SPICLK_GPIO 14                      //!< SPIB CLK GPIO number
-#define SPIB_controller_SPICLK_PIN_CONFIG GPIO_14_SPIC_CLK  //!< SPIB CLK pin configuration
+#define GPIO_PIN_SPIC_CLK 14                                //!< SPIC CLK pin number
+#define SPIC_controller_SPICLK_GPIO 14                      //!< SPIC CLK GPIO number
+#define SPIC_controller_SPICLK_PIN_CONFIG GPIO_14_SPIC_CLK  //!< SPIC CLK pin configuration
 
 //
-// SPIB_STE - GPIO Settings
+// SPIC_STE - GPIO Settings
 //
-#define GPIO_PIN_SPIB_STE 23                                //!< SPIB STE pin number
-#define SPIB_controller_SPISTE_GPIO 23                      //!< SPIB STE GPIO number
-#define SPIB_controller_SPISTE_PIN_CONFIG GPIO_15_SPIC_STE  //!< SPIB STE pin configuration
+#define GPIO_PIN_SPIC_STE 23                                //!< SPIC STE pin number
+#define SPIC_controller_SPISTE_GPIO 23                      //!< SPIC STE GPIO number
+#define SPIC_controller_SPISTE_PIN_CONFIG GPIO_15_SPIC_STE  //!< SPIC STE pin configuration
 
 
 
@@ -130,7 +130,7 @@ extern "C"
 //                                
 //*****************************************************************************
 extern void spiARxFIFOISR(void);  //!< SPIA RX FIFO interrupt service routine
-extern void spiBTxFIFOISR(void);  //!< SPIB TX FIFO interrupt service routine
+extern void spiBTxFIFOISR(void);  //!< SPIC TX FIFO interrupt service routine
 
 //*****************************************************************************
 //
@@ -148,16 +148,16 @@ extern void spiBTxFIFOISR(void);  //!< SPIB TX FIFO interrupt service routine
 //*****************************************************************************
 void SPIA_peripheral_init();
 
-#define SPIB_controller_BASE SPI3_BASE                    //!< SPIB controller base address
-#define SPIB_controller_BITRATE 500000                    //!< SPIB controller bit rate (500 kHz)
-#define SPIB_controller_DATAWIDTH 16                      //!< SPIB controller data width (16 bits)
+#define SPIC_controller_BASE SPI3_BASE                    //!< SPIC controller base address
+#define SPIC_controller_BITRATE 500000                    //!< SPIC controller bit rate (500 kHz)
+#define SPIC_controller_DATAWIDTH 16                      //!< SPIC controller data width (16 bits)
 
 //*****************************************************************************
 //
-// Initialize SPIB module as controller with FIFO interrupts
+// Initialize SPIC module as controller with FIFO interrupts
 //
 //*****************************************************************************
-void SPIB_controller_init();
+void SPIC_controller_init();
 
 
 //*****************************************************************************
@@ -176,7 +176,7 @@ void INTERRUPT_init();
 
 //*****************************************************************************
 //
-// Initialize SPI modules (SPIA and SPIB)
+// Initialize SPI modules (SPIA and SPIC)
 //
 //*****************************************************************************
 void SPIX_init();

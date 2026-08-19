@@ -135,6 +135,11 @@ void SPIX_init(void)
 void mySPI_init(void)
 {
     //
+    // Enable SPI1 peripheral clock
+    //
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_BSPI1);
+
+    //
     // Disable the SPI module before configuration
     //
     SPI_disableModule(mySPI_BASE);

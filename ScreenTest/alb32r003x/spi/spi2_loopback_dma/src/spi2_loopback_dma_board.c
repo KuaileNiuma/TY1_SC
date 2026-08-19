@@ -103,12 +103,12 @@ void SPI_init(void)
 
 void mySPI0_init()
 {
-	SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_BSPI1);
+	SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_BSPI2);
 
 	//
     // Disable the SPI module before configuration
     //
-    SPI_disableModule(SPI1_BASE);
+    SPI_disableModule(mySPI_BASE);
 
     //
     // Configure SPI with specified parameters

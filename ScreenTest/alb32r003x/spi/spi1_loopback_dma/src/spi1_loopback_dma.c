@@ -91,14 +91,8 @@ static void spi_tx_dma_init(void)
     DMA_ConfigParams dmaCfg;
     DMA_configParameter(&dmaCfg);
     //
-    //Turn on the DMA1 & DMASCH peripheral clock
+    // Channel-level reset (module enable done once in main)
     //
-    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_DMA1);
-    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_DMASCH);
-    //
-    //Turn on the DMA1 & DMASCH peripheral clock
-    //
-    DMA_disableModule(DMA1_CH1_BASE);
     DMA_stopChannel(DMA1_CH1_BASE);
     DMA_DeConfChannel(DMA1_CH1_BASE);
     DMA_disableInterrupt(DMA1_CH1_BASE);
@@ -106,7 +100,7 @@ static void spi_tx_dma_init(void)
     // Set up DMA transfer parameters
     //
     dmaCfg.enableInterrupt = 0;
-    dmaCfg.blockTS = 64;
+    dmaCfg.blockTS = 16;
     dmaCfg.ttfc = DMA_TT_FC_1_M2P_DMAC;
     dmaCfg.dmaDstReqId = DMAMUX_ReqId_dma_SPI1_TX;
     dmaCfg.srcAddr = (uint32_t) writeBuffer;
@@ -122,7 +116,6 @@ static void spi_tx_dma_init(void)
     // Apply DMA channel configuration and start
     //
     DMA_configChannel(DMA1_CH1_BASE, &dmaCfg);
-	DMA_enableModule(DMA1_CH1_BASE);
     DMA_startChannel(DMA1_CH1_BASE);
 }
 
@@ -139,14 +132,8 @@ static void spi_rx_dma_init(void)
     DMA_ConfigParams dmaCfg;
     DMA_configParameter(&dmaCfg);
     //
-    //Turn on the DMA1 & DMASCH peripheral clock
+    // Channel-level reset (module enable done once in main)
     //
-    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_DMA1);
-    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_DMASCH);
-    //
-    //Turn on the DMA1 & DMASCH peripheral clock
-    //
-    DMA_disableModule(DMA1_CH2_BASE);
     DMA_stopChannel(DMA1_CH2_BASE);
     DMA_DeConfChannel(DMA1_CH2_BASE);
     DMA_disableInterrupt(DMA1_CH2_BASE);
@@ -154,7 +141,7 @@ static void spi_rx_dma_init(void)
     // Set up DMA transfer parameters
     //
     dmaCfg.enableInterrupt = 0;
-    dmaCfg.blockTS = 64;
+    dmaCfg.blockTS = 16;
     dmaCfg.ttfc = DMA_TT_FC_2_P2M_DMAC;
     dmaCfg.dmaSrcReqId = DMAMUX_ReqId_dma_SPI1_RX;
     dmaCfg.srcAddr = (uint32_t)(mySPI_BASE + SPI_O_DATAREG);
@@ -170,7 +157,6 @@ static void spi_rx_dma_init(void)
     // Apply DMA channel configuration and start
     //
     DMA_configChannel(DMA1_CH2_BASE, &dmaCfg);
-	DMA_enableModule(DMA1_CH2_BASE);
     DMA_startChannel(DMA1_CH2_BASE);
 }
 
@@ -205,19 +191,26 @@ int main(void)
 	 // Configure DMA for UART transmission and reception
 	 //
 
+	 // Enable DMA1 controller once (avoid module-level disable in
+	 // spi_tx/rx_dma_init overwriting each other)
+	 SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_DMA1);
+	 SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_DMASCH);
+	 DMA_enableModule(DMA1_CH1_BASE);
+
 	 spi_rx_dma_init();
 	 spi_tx_dma_init();
 	 dma_timeout = 0xFFFFFF;
-	 while(((DMA_getRawInterruptStatus(DMA1_CH2_BASE) & DMA_INT_TFR) == 0) && dma_timeout--);
-	 if (dma_timeout == 0) { printf("SPI DMA loopback FAIL: rx timeout\r\n"); return SC_FAIL; }
-	 dma_timeout = 0xFFFFFF;
 	 while(((DMA_getRawInterruptStatus(DMA1_CH1_BASE) & DMA_INT_TFR) == 0) && dma_timeout--);
-	 if (dma_timeout == 0) { printf("SPI DMA loopback FAIL: tx timeout\r\n"); return SC_FAIL; }
+	 if (dma_timeout == 0) { printf("SPI1 DMA loopback FAIL: tx timeout\r\n"); return SC_FAIL; }
+	 dma_timeout = 0xFFFFFF;
+	 while(((DMA_getRawInterruptStatus(DMA1_CH2_BASE) & DMA_INT_TFR) == 0) && dma_timeout--);
+	 if (dma_timeout == 0) { printf("SPI1 DMA loopback FAIL: rx timeout\r\n"); return SC_FAIL; }
+
 
      //
      // Print sent and received data (64 groups)
      //
-     printf("SPI DMA loopback: sent=");
+     printf("SPI1 DMA loopback: sent=");
      for (i = 0; i < TEST_DATA_COUNT; i++) printf("%02X ", (unsigned int)writeBuffer[i]);
      printf(" recv=");
      for (i = 0; i < TEST_DATA_COUNT; i++) printf("%02X ", (unsigned int)readBuffer[i]);
@@ -227,10 +220,10 @@ int main(void)
      //
      if (memcmp(readBuffer, writeBuffer, TEST_DATA_COUNT) != 0)
      {
-         printf("SPI DMA loopback FAIL: data mismatch\r\n");
+         printf("SPI1 DMA loopback FAIL: data mismatch\r\n");
          return SC_FAIL;
      }
-     printf("SPI DMA loopback PASS: 64 groups verified\r\n");
+     printf("SPI1 DMA loopback PASS: 64 groups verified\r\n");
      return SC_PASS;
 }
 

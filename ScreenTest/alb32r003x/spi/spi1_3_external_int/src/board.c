@@ -82,19 +82,19 @@ void PinMux_init(void)
 	GPIO_setPinConfig(SPIA_peripheral_SPISTE_PIN_CONFIG);
 
     //
-    // SPIB_controller Pinmux configuration
+    // SPIC_controller Pinmux configuration
     //
-    // SPIB SIMO (Master Out Slave In) pin configuration
-	GPIO_setPinConfig(SPIB_controller_SPISIMO_PIN_CONFIG);
+    // SPIC SIMO (Master Out Slave In) pin configuration
+	GPIO_setPinConfig(SPIC_controller_SPISIMO_PIN_CONFIG);
 
-    // SPIB SOMI (Slave Out Master In) pin configuration
-	GPIO_setPinConfig(SPIB_controller_SPISOMI_PIN_CONFIG);
+    // SPIC SOMI (Slave Out Master In) pin configuration
+	GPIO_setPinConfig(SPIC_controller_SPISOMI_PIN_CONFIG);
 
-    // SPIB CLK (Clock) pin configuration
-	GPIO_setPinConfig(SPIB_controller_SPICLK_PIN_CONFIG);
+    // SPIC CLK (Clock) pin configuration
+	GPIO_setPinConfig(SPIC_controller_SPICLK_PIN_CONFIG);
 
-    // SPIB STE (Slave Transmit Enable) pin configuration
-	GPIO_setPinConfig(SPIB_controller_SPISTE_PIN_CONFIG);
+    // SPIC STE (Slave Transmit Enable) pin configuration
+	GPIO_setPinConfig(SPIC_controller_SPISTE_PIN_CONFIG);
 }
 
 //*****************************************************************************
@@ -105,7 +105,7 @@ void PinMux_init(void)
 void INTERRUPT_init(void)
 {
     //
-    // Register and configure SPIB TX FIFO interrupt
+    // Register and configure SPIC TX FIFO interrupt
     //
     Interrupt_register(SPI3TX_IRQn, spiBTxFIFOISR);
     Interrupt_setPriority(SPI3TX_IRQn, 0, 0);
@@ -115,10 +115,10 @@ void INTERRUPT_init(void)
     //
     // Register and configure SPIA RX FIFO interrupt
     //
-    Interrupt_register(SPI4RX_IRQn, spiARxFIFOISR);
-    Interrupt_setPriority(SPI4RX_IRQn, 0, 0);
-    Interrupt_enable(SPI4RX_IRQn);
-    ECLIC_EnableIRQ(SPI4RX_IRQn);
+    Interrupt_register(SPI1RX_IRQn, spiARxFIFOISR);
+    Interrupt_setPriority(SPI1RX_IRQn, 0, 0);
+    Interrupt_enable(SPI1RX_IRQn);
+    ECLIC_EnableIRQ(SPI1RX_IRQn);
 }
 
 //*****************************************************************************
@@ -134,9 +134,9 @@ void SPIX_init(void)
 	SPIA_peripheral_init();
     
     //
-    // Initialize SPIB as controller
+    // Initialize SPIC as controller
     //
-	SPIB_controller_init();
+	SPIC_controller_init();
 }
 
 
@@ -147,7 +147,7 @@ void SPIX_init(void)
 //*****************************************************************************
 void SPIA_peripheral_init(void)
 {
-	SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_BSPI4);
+	SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_BSPI1);
 
     //
     // Disable the SPI module before configuration
@@ -200,60 +200,60 @@ void SPIA_peripheral_init(void)
 
 //*****************************************************************************
 //
-// Initializes SPIB Module as Controller with FIFO Interrupts
+// Initializes SPIC Module as Controller with FIFO Interrupts
 //
 //*****************************************************************************
-void SPIB_controller_init(void)
+void SPIC_controller_init(void)
 {
 	SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_BSPI3);
 
     //
     // Disable the SPI module before configuration
     //
-	SPI_disableModule(SPIB_controller_BASE);
+	SPI_disableModule(SPIC_controller_BASE);
 
     //
     // Configure SPI with specified parameters
     // - Clock frequency: DEVICE_APBCLK_FREQ
     // - Protocol: SPI_PROT_POL0PHA0 (Clock idle low, data captured on rising edge)
     // - Mode: Controller mode
-    // - Bit rate: SPIB_controller_BITRATE
-    // - Data width: SPIB_controller_DATAWIDTH
+    // - Bit rate: SPIC_controller_BITRATE
+    // - Data width: SPIC_controller_DATAWIDTH
     //
-	SPI_setConfig(SPIB_controller_BASE,DEVICE_APBCLK_FREQ,SPI_PROT_POL0PHA0,
-			SPI_MODE_CONTROLLER,SPIB_controller_BITRATE,SPIB_controller_DATAWIDTH);
+	SPI_setConfig(SPIC_controller_BASE,DEVICE_APBCLK_FREQ,SPI_PROT_POL0PHA0,
+			SPI_MODE_CONTROLLER,SPIC_controller_BITRATE,SPIC_controller_DATAWIDTH);
 
     //
     // Set FIFO interrupt levels
     // - TX interrupt when 2 or fewer words in FIFO
     // - RX interrupt when 2 or more words in FIFO
     //
-    SPI_setFIFOInterruptLevel(SPIB_controller_BASE, SPI_FIFO_TX16, SPI_FIFO_TX16);
+    SPI_setFIFOInterruptLevel(SPIC_controller_BASE, SPI_FIFO_TX16, SPI_FIFO_TX16);
 
     //
     // Disable all SPI interrupts before configuration
     //
-    SPI_disableAllInterrupt(SPIB_controller_BASE);
+    SPI_disableAllInterrupt(SPIC_controller_BASE);
 
     //
     // Clear all interrupt status flags
     //
-    SPI_clearAllInterruptStatus(SPIB_controller_BASE);
+    SPI_clearAllInterruptStatus(SPIC_controller_BASE);
 
     //
     // Enable TX FIFO interrupt
     //
-	SPI_enableInterrupt(SPIB_controller_BASE, SPI_INT_TXFF);
+	SPI_enableInterrupt(SPIC_controller_BASE, SPI_INT_TXFF);
 
     //
     // Disable loopback mode for external communication
     //
-	SPI_disableLoopback(SPIB_controller_BASE);
+	SPI_disableLoopback(SPIC_controller_BASE);
 
     //
     // Enable the SPI module after configuration
     //
-    SPI_enableModule(SPIB_controller_BASE);
+    SPI_enableModule(SPIC_controller_BASE);
 }
 
 

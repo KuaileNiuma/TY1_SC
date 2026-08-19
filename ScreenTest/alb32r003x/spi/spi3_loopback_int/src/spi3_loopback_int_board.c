@@ -100,18 +100,18 @@ void INTERRUPT_init(void)
     //
     // Register and configure SPI RX FIFO interrupt
     //
-    Interrupt_register(SPI1RX_IRQn, spiRxFIFOISR);
-    Interrupt_setPriority(SPI1RX_IRQn, 0, 0);
-    Interrupt_enable(SPI1RX_IRQn);
-    ECLIC_EnableIRQ(SPI1RX_IRQn);
+    Interrupt_register(SPI3RX_IRQn, spiRxFIFOISR);
+    Interrupt_setPriority(SPI3RX_IRQn, 0, 0);
+    Interrupt_enable(SPI3RX_IRQn);
+    ECLIC_EnableIRQ(SPI3RX_IRQn);
 
     //
     // Register and configure SPI TX FIFO interrupt
     //
-    Interrupt_register(SPI1TX_IRQn, spiTxFIFOISR);
-    Interrupt_setPriority(SPI1TX_IRQn, 0, 0);
-    Interrupt_enable(SPI1TX_IRQn);
-    ECLIC_EnableIRQ(SPI1TX_IRQn);
+    Interrupt_register(SPI3TX_IRQn, spiTxFIFOISR);
+    Interrupt_setPriority(SPI3TX_IRQn, 0, 0);
+    Interrupt_enable(SPI3TX_IRQn);
+    ECLIC_EnableIRQ(SPI3TX_IRQn);
 }
 
 //*****************************************************************************
@@ -134,6 +134,11 @@ void SPIX_init(void)
 //*****************************************************************************
 void mySPI_init(void)
 {
+    //
+    // Enable SPI3 peripheral clock
+    //
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_BSPI3);
+
     //
     // Disable the SPI module before configuration
     //

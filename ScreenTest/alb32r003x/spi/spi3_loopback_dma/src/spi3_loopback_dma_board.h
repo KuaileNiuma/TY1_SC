@@ -102,7 +102,7 @@ extern "C"
 //*****************************************************************************
 #define mySPI_BASE SPI3_BASE           //!< SPI base address
 #define mySPI_BITRATE 1000000          //!< SPI bit rate (1 MHz)
-#define mySPI_DATAWIDTH 16             //!< SPI data width (16 bits)
+#define mySPI_DATAWIDTH 32             //!< SPI data width (32 bits)
 
 
 
