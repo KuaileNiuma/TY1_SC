@@ -199,7 +199,7 @@ int main(void)
 {
     uint32_t i;
     alb32r003x_evb_init();
-    printf("CANFD EX03 LOOPBACK.\r\n");
+    printf("CANFD2 LOOPBACK.\r\n");
     //
     // Disable interrupts before initialization
     //

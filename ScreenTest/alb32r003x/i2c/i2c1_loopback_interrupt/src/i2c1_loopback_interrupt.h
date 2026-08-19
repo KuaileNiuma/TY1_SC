@@ -96,6 +96,6 @@
 // loopback mode, and runs the interrupt-based test to verify communication.
 //
 //*****************************************************************************
-void i2c_test02_loopback_irq(void);
+int i2c_test02_loopback_irq(void);
 
 #endif

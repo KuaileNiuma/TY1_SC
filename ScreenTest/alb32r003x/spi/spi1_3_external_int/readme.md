@@ -1,4 +1,4 @@
-## spi3_4_external_int
+## spi1_3_external_int
 
 ### 1 概述
 本例程展示了使用SPI2与SPI3使用中断收发进行通信功能

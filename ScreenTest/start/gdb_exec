@@ -1,0 +1,9 @@
+﻿set pagination off
+set confirm off
+set verbose off
+set mem inaccessible-by-default off
+set remotetimeout 250
+set architecture riscv:rv32
+target remote localhost:3333
+load
+tbreak _postmain_fini

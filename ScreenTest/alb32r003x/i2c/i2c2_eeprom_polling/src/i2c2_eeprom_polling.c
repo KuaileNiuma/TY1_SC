@@ -60,7 +60,7 @@
 uint32_t g_i2c_base = myMasterI2C_BASE;     //!< I2C base address
 uint8_t wdata[W_DATA_LEN] = {0};            //!< Write data buffer
 uint8_t rdata[W_DATA_LEN] = {0};            //!< Read data buffer
-uint32_t i2c_port_num = 1;                  //!< I2C port number
+uint32_t i2c_port_num = 2;                  //!< I2C port number
 
 //*****************************************************************************
 //
@@ -155,7 +155,7 @@ void I2C_GPIO_init(void)
 // I2C Initialization Function
 //
 //*****************************************************************************
-void I2Cinit(uint32_t i2c_base)
+int I2Cinit(uint32_t i2c_base)
 {
     //
     // Store I2C base address
@@ -170,16 +170,24 @@ void I2Cinit(uint32_t i2c_base)
     //
     if (i2c_base == I2C1_BASE)
     {
-        i2c_port_num = 0;
+        i2c_port_num = 1;
     }
     else if (i2c_base == I2C2_BASE)
     {
-        i2c_port_num = 1;
+        i2c_port_num = 2;
+    }
+    else if (i2c_base == I2C3_BASE)
+    {
+        i2c_port_num = 3;
+    }
+    else if (i2c_base == I2C4_BASE)
+    {
+        i2c_port_num = 4;
     }
     else
     {
         printf("i2c base error 0x%x \r\n", i2c_base);
-        return;
+        return -1;
     }
 
     //
@@ -223,6 +231,8 @@ void I2Cinit(uint32_t i2c_base)
     Interrupt_register(myMasterI2C_IRQn, I2CX_INTR_IRQHandler);
     Interrupt_setPriority(myMasterI2C_IRQn, 0, 0);
     Interrupt_enable(myMasterI2C_IRQn);
+
+    return 0;
 }
 
 //*****************************************************************************
@@ -326,7 +336,10 @@ int main(void)
     //
     // Initialize I2C module
     //
-    I2Cinit(g_i2c_base);
+    if (I2Cinit(g_i2c_base) != 0)
+    {
+        return SC_FAIL;
+    }
 
     //
     // Initialize EEPROM interface
@@ -346,7 +359,7 @@ int main(void)
     //
     // Print end message
     //
-    printf("i2c_test04_eeprom_polling end\r\n");
+    printf("i2c2_eeprom_polling end\r\n");
 
 
     return (ret == 0) ? SC_PASS : SC_FAIL;

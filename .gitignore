@@ -22,3 +22,11 @@ core.*
 # IDE 临时文件
 *.swp
 .DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# screen_exec 运行产物
+ScreenTest/start/test_result_*.txt
+ScreenTest/start/gdb_logs_*/

@@ -60,6 +60,7 @@ void spiBTxFIFOISR(void);           //!< SPIB Transmit FIFO Interrupt Service Ro
 volatile uint16_t sData[]={0xFF, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F};
 volatile uint16_t rData[]={0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 volatile int spi_test_result = 0;   //!< 1=pass, -1=fail
+volatile uint32_t spi_group_count = 0; //!< received group counter
 
 //*****************************************************************************
 //
@@ -115,38 +116,56 @@ __INTERRUPT void spiARxFIFOISR(void)
     //
     // Get SPI interrupt status
     //
-    status = SPI_getInterruptStatus(SPI3_BASE);
+    status = SPI_getInterruptStatus(SPI1_BASE);
 
     //
     // Read received data from SPI module
     //
     for(i = 0; i < 16; i++)
     {
-        rData[i] = SPI_readDataNonBlocking(SPI3_BASE);
+        rData[i] = SPI_readDataNonBlocking(SPI1_BASE);
     }
 
-    //
-    // Verify received data matches expected pattern
-    //
-    for(i = 0; i < 16; i++)
+    spi_group_count++;
+    if (spi_test_result == 0)
     {
-        if(rData[i] != sData[i])
+        //
+        // Print sent and received data for this group
+        //
+        printf("SPI1 communicate with SPI2 group %u: sent=", (unsigned int)spi_group_count);
+        for (i = 0; i < 16; i++) printf("%02X ", (unsigned int)sData[i]);
+        printf(" recv=");
+        for (i = 0; i < 16; i++) printf("%02X ", (unsigned int)rData[i]);
+        printf("\r\n");
+        //
+        // Verify received data matches expected pattern
+        //
+        for (i = 0; i < 16; i++)
         {
-            spi_test_result = -1;
-            break;
+            if (rData[i] != sData[i])
+            {
+                spi_test_result = -1;
+                break;
+            }
         }
-        spi_test_result = 1;
-    }
-    if (spi_test_result == 1)
-    {
-        printf("SPI1 communicate with SPI2 by interrupt successfully!\r\n");
-    }
-    else
-    {
-        printf("SPI external interrupt FAIL: data mismatch\r\n");
+        if (spi_test_result == -1)
+        {
+            printf("SPI1 communicate with SPI2 FAIL: data mismatch at group %u\r\n", (unsigned int)spi_group_count);
+            Interrupt_disable(SPI1RX_IRQn);
+        }
+        else if (spi_group_count >= 64)
+        {
+            spi_test_result = 1;
+            printf("SPI1 communicate with SPI2 PASS: 64 groups verified\r\n");
+            Interrupt_disable(SPI1RX_IRQn);
+        }
+        else
+        {
+            // Trigger the next transaction
+            Interrupt_enable(SPI2TX_IRQn);
+        }
     }
     delay_ms(50);
-    Interrupt_disable(SPI3RX_IRQn);
     //
     // Update data position counter
     //

@@ -112,7 +112,7 @@ extern void spiFIFOISR(void);                   //!< SPI FIFO interrupt service 
 // SPI Configuration
 //
 //*****************************************************************************
-#define mySPI_BASE SPI1_BASE           //!< SPI base address
+#define mySPI_BASE SPI4_BASE           //!< SPI base address
 #define mySPI_BITRATE 500000           //!< SPI bit rate (500 kHz)
 #define mySPI_DATAWIDTH 16             //!< SPI data width (16 bits)
 

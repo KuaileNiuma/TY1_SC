@@ -79,6 +79,7 @@ uint16_t sData[2];                  //!< Data buffer to send over SPI
 uint16_t rData[2];                  //!< Buffer to store received SPI data
 uint16_t rDataPoint = 0;            //!< Tracks position in data stream for error checking
 volatile int spi_test_result = 0;   //!< 1=pass, -1=fail
+volatile uint32_t spi_group_count = 0; //!< received group counter
 
 
 
@@ -152,7 +153,7 @@ __INTERRUPT void spiTxFIFOISR(void)
         //
         for(i = 0; i < 2; i++)
         {
-           SPI_writeDataNonBlocking(SPI1_BASE, sData[i]);
+           SPI_writeDataNonBlocking(mySPI_BASE, sData[i]);
         }
 
         //
@@ -166,7 +167,7 @@ __INTERRUPT void spiTxFIFOISR(void)
         //
         // Clear TX FIFO interrupt flag
         //
-        SPI_clearInterruptStatus(SPI1_BASE, SPI_INT_TXFF);
+        SPI_clearInterruptStatus(mySPI_BASE, SPI_INT_TXFF);
     }
 }
 
@@ -195,28 +196,40 @@ __INTERRUPT void spiRxFIFOISR(void)
         //
         for(i = 0; i < 2; i++)
         {
-            rData[i] = SPI_readDataNonBlocking(SPI1_BASE);
+            rData[i] = SPI_readDataNonBlocking(mySPI_BASE);
         }
 
-        //
-        // Verify received data matches expected pattern
-        //
-        for(i = 0; i < 2; i++)
+        spi_group_count++;
+        if (spi_test_result == 0)
         {
-            if(rData[i] != (uint16_t)(rDataPoint + i))
+            //
+            // Print sent and received data for this group
+            //
+            printf("SPI4 loopback group %u: sent=", (unsigned int)spi_group_count);
+            for (i = 0; i < 2; i++) printf("%04X ", (unsigned int)(rDataPoint + i));
+            printf(" recv=");
+            for (i = 0; i < 2; i++) printf("%04X ", (unsigned int)rData[i]);
+            printf("\r\n");
+            //
+            // Verify received data matches expected pattern
+            //
+            for (i = 0; i < 2; i++)
             {
-                spi_test_result = -1;
-                break;
+                if (rData[i] != (uint16_t)(rDataPoint + i))
+                {
+                    spi_test_result = -1;
+                    break;
+                }
             }
-            spi_test_result = 1;
-        }
-        if (spi_test_result == 1)
-        {
-            printf("SPI transmit and receive successfully!\r\n");
-        }
-        else
-        {
-            printf("SPI loopback FAIL: data mismatch\r\n");
+            if (spi_test_result != -1 && spi_group_count >= 64)
+            {
+                spi_test_result = 1;
+                printf("SPI4 loopback PASS: 64 groups verified\r\n");
+            }
+            else if (spi_test_result == -1)
+            {
+                printf("SPI4 loopback FAIL: data mismatch at group %u\r\n", (unsigned int)spi_group_count);
+            }
         }
 
         //
@@ -227,6 +240,6 @@ __INTERRUPT void spiRxFIFOISR(void)
         //
         // Clear RX FIFO interrupt flag
         //
-        SPI_clearInterruptStatus(SPI1_BASE, SPI_INT_RXFF);
+        SPI_clearInterruptStatus(mySPI_BASE, SPI_INT_RXFF);
     }
 }

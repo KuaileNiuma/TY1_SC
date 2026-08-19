@@ -72,25 +72,25 @@ extern "C"
 //
 #define GPIO_PIN_SPIA_SIMO 2                       //!< SPIA SIMO GPIO pin number
 #define SPIA_peripheral_SPISIMO_GPIO 2             //!< SPIA SIMO GPIO number
-#define SPIA_peripheral_SPISIMO_PIN_CONFIG GPIO_2_SPIC_SIMO //!< SPIA SIMO pin configuration
+#define SPIA_peripheral_SPISIMO_PIN_CONFIG GPIO_2_SPIA_SIMO //!< SPIA SIMO pin configuration
 //
 // SPIA_SOMI - GPIO Settings
 //
 #define GPIO_PIN_SPIA_SOMI 1                       //!< SPIA SOMI GPIO pin number
 #define SPIA_peripheral_SPISOMI_GPIO 1             //!< SPIA SOMI GPIO number
-#define SPIA_peripheral_SPISOMI_PIN_CONFIG GPIO_1_SPIC_SOMI //!< SPIA SOMI pin configuration
+#define SPIA_peripheral_SPISOMI_PIN_CONFIG GPIO_1_SPIA_SOMI //!< SPIA SOMI pin configuration
 //
 // SPIA_CLK - GPIO Settings
 //
 #define GPIO_PIN_SPIA_CLK 3                        //!< SPIA CLK GPIO pin number
 #define SPIA_peripheral_SPICLK_GPIO 3              //!< SPIA CLK GPIO number
-#define SPIA_peripheral_SPICLK_PIN_CONFIG GPIO_3_SPIC_CLK //!< SPIA CLK pin configuration
+#define SPIA_peripheral_SPICLK_PIN_CONFIG GPIO_3_SPIA_CLK //!< SPIA CLK pin configuration
 //
 // SPIA_STE - GPIO Settings
 //
 #define GPIO_PIN_SPIA_STE 0                        //!< SPIA STE GPIO pin number
 #define SPIA_peripheral_SPISTE_GPIO 0              //!< SPIA STE GPIO number
-#define SPIA_peripheral_SPISTE_PIN_CONFIG GPIO_0_SPIC_STE //!< SPIA STE pin configuration
+#define SPIA_peripheral_SPISTE_PIN_CONFIG GPIO_0_SPIA_STE //!< SPIA STE pin configuration
 
 //
 // SPIB -> SPIB_controller Pinmux
@@ -111,16 +111,16 @@ extern "C"
 //
 // SPIB_CLK - GPIO Settings
 //
-#define GPIO_PIN_SPIB_CLK 4                                //!< SPIB CLK pin number
-#define SPIB_controller_SPICLK_GPIO 4                      //!< SPIB CLK GPIO number
-#define SPIB_controller_SPICLK_PIN_CONFIG GPIO_4_SPIB_CLK  //!< SPIB CLK pin configuration
+#define GPIO_PIN_SPIB_CLK 14                                //!< SPIB CLK pin number
+#define SPIB_controller_SPICLK_GPIO 14                      //!< SPIB CLK GPIO number
+#define SPIB_controller_SPICLK_PIN_CONFIG GPIO_14_SPIB_CLK  //!< SPIB CLK pin configuration
 
 //
 // SPIB_STE - GPIO Settings
 //
-#define GPIO_PIN_SPIB_STE 23                                //!< SPIB STE pin number
-#define SPIB_controller_SPISTE_GPIO 23                      //!< SPIB STE GPIO number
-#define SPIB_controller_SPISTE_PIN_CONFIG GPIO_23_SPIB_STE  //!< SPIB STE pin configuration
+#define GPIO_PIN_SPIB_STE 15                                //!< SPIB STE pin number
+#define SPIB_controller_SPISTE_GPIO 15                      //!< SPIB STE GPIO number
+#define SPIB_controller_SPISTE_PIN_CONFIG GPIO_15_SPIB_STE  //!< SPIB STE pin configuration
 
 
 
@@ -137,7 +137,7 @@ extern void spiBTxFIFOISR(void);  //!< SPIB TX FIFO interrupt service routine
 // SPI Configuration                                
 //                                
 //*****************************************************************************
-#define SPIA_peripheral_BASE SPI3_BASE                    //!< SPIA peripheral base address
+#define SPIA_peripheral_BASE SPI1_BASE                    //!< SPIA peripheral base address
 #define SPIA_peripheral_BITRATE 500000                    //!< SPIA peripheral bit rate (500 kHz)
 #define SPIA_peripheral_DATAWIDTH 16                      //!< SPIA peripheral data width (16 bits)
 

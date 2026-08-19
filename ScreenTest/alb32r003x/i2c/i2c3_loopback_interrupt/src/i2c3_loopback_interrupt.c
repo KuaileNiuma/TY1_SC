@@ -57,7 +57,7 @@
 //
 //*****************************************************************************
 uint32_t g_i2c_base = myI2C_BASE;        //!< I2C base address
-uint32_t i2c_port_num = 0;               //!< I2C port number
+uint32_t i2c_port_num = 3;               //!< I2C port number
 volatile uint32_t i2c_test_finish = 0;   //!< Test completion flag
 volatile int i2c_test_result = 0;       //!< 1=pass, -1=fail
 
@@ -174,7 +174,7 @@ __INTERRUPT void I2CISR(void)
 // using interrupts.
 //
 //*****************************************************************************
-void i2c_loopback_verify(uint32_t i2c_base)
+int i2c_loopback_verify(uint32_t i2c_base)
 {
 	I2C_INIT_PARAM init_param = {0}; //!< I2C initialization parameters
 
@@ -188,7 +188,7 @@ void i2c_loopback_verify(uint32_t i2c_base)
     //
 	if (i2c_base == I2C1_BASE)
 	{
-		i2c_port_num = 0;
+		i2c_port_num = 1;
 		SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_I2C1);
 		SysCtl_setGPIOxPullEnable(32 ,ENABLE);
 		SysCtl_setGPIOxPullSel(32, GPIOx_PULL_UP);
@@ -201,7 +201,7 @@ void i2c_loopback_verify(uint32_t i2c_base)
 	}
 	else if (i2c_base == I2C2_BASE)
 	{
-		i2c_port_num = 1;
+		i2c_port_num = 2;
 		SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_I2C2);
 		SysCtl_setGPIOxPullEnable(2 ,ENABLE);
 		SysCtl_setGPIOxPullSel(2, GPIOx_PULL_UP);
@@ -214,7 +214,7 @@ void i2c_loopback_verify(uint32_t i2c_base)
 	}
 	else if (i2c_base == I2C3_BASE)
 	{
-		i2c_port_num = 2;
+		i2c_port_num = 3;
 		SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_I2C3);
 		SysCtl_setGPIOxPullEnable(62 ,ENABLE);
 		SysCtl_setGPIOxPullSel(62, GPIOx_PULL_UP);
@@ -225,10 +225,19 @@ void i2c_loopback_verify(uint32_t i2c_base)
 	    GPIO_setPinConfig(myI2C_SDA_PIN);
 	    GPIO_setPinConfig(myI2C_SCL_PIN);
 	}
+	else if (i2c_base == I2C4_BASE)
+	{
+		i2c_port_num = 4;
+		SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_I2C4);
+
+	    SysCtl_enablePeripheral(myI2C_GPIO_CLK_EN);
+	    GPIO_setPinConfig(myI2C_SDA_PIN);
+	    GPIO_setPinConfig(myI2C_SCL_PIN);
+	}
 	else
 	{
 		printf("i2c base error 0x%x \r\n", i2c_base);
-		return;
+		return -1;
 	}
 
     //
@@ -289,6 +298,8 @@ void i2c_loopback_verify(uint32_t i2c_base)
     //
     while(i2c_test_finish == 0);
     i2c_test_finish = 0;
+
+    return 0;
 }
 
 
@@ -299,7 +310,7 @@ void i2c_loopback_verify(uint32_t i2c_base)
 // This function configures GPIO pins for I2C and runs the loopback test.
 //
 //*****************************************************************************
-void i2c_test02_loopback_irq(void)
+int i2c_test02_loopback_irq(void)
 {
     //
     // Configure GPIO pins as I2C_SDA and I2C_CLK
@@ -315,12 +326,14 @@ void i2c_test02_loopback_irq(void)
     //
     // Run I2C loopback verification
     //
-    i2c_loopback_verify(myI2C_BASE);
+    int ret = i2c_loopback_verify(myI2C_BASE);
 
     //
     // Print test end message
     //
     printf("i2c_test02_loopback_interrupt end \r\n");
+
+    return ret;
 }
 
 //*****************************************************************************
@@ -341,7 +354,10 @@ int main(void)
     //
     // Run I2C loopback interrupt test
     //
-    i2c_test02_loopback_irq();
+    if (i2c_test02_loopback_irq() != 0)
+    {
+        return SC_FAIL;
+    }
 
     //
     // Return test result

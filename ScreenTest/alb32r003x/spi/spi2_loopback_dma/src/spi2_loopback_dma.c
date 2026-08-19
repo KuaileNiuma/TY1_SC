@@ -35,6 +35,7 @@
  */
 
 #include "spi2_loopback_dma_board.h"
+#include <string.h>
 #include "alb32r003x_evb.h"
 #include "alb32r003x_screenTest.h"
 
@@ -44,7 +45,7 @@
 // Macros & Typedefs
 //
 //*****************************************************************************
-#define TEST_DATA_COUNT		16                          //!< Data length for UART transmission
+#define TEST_DATA_COUNT		64                          //!< Data length for UART transmission
 
 //*****************************************************************************
 //
@@ -105,11 +106,11 @@ static void spi_tx_dma_init(void)
     // Set up DMA transfer parameters
     //
     dmaCfg.enableInterrupt = 0;
-    dmaCfg.blockTS = 16;
+    dmaCfg.blockTS = 64;
     dmaCfg.ttfc = DMA_TT_FC_1_M2P_DMAC;
     dmaCfg.dmaDstReqId = DMAMUX_ReqId_dma_SPI1_TX;
     dmaCfg.srcAddr = (uint32_t) writeBuffer;
-    dmaCfg.destAddr = (uint32_t)(SPI1_BASE + SPI_O_DATAREG);
+    dmaCfg.destAddr = (uint32_t)(mySPI_BASE + SPI_O_DATAREG);
     dmaCfg.srcBtl = DMA_BTL_8;
     dmaCfg.destBtl = DMA_BTL_8;
     dmaCfg.srcAddrDirect = DMA_ADDR_INCRE;
@@ -153,10 +154,10 @@ static void spi_rx_dma_init(void)
     // Set up DMA transfer parameters
     //
     dmaCfg.enableInterrupt = 0;
-    dmaCfg.blockTS = 16;
+    dmaCfg.blockTS = 64;
     dmaCfg.ttfc = DMA_TT_FC_2_P2M_DMAC;
     dmaCfg.dmaSrcReqId = DMAMUX_ReqId_dma_SPI1_RX;
-    dmaCfg.srcAddr = (uint32_t)(SPI1_BASE + SPI_O_DATAREG);
+    dmaCfg.srcAddr = (uint32_t)(mySPI_BASE + SPI_O_DATAREG);
     dmaCfg.destAddr = (uint32_t)readBuffer;
     dmaCfg.srcBtl = DMA_BTL_8;
     dmaCfg.destBtl = DMA_BTL_8;
@@ -185,6 +186,7 @@ int main(void)
 	DMAC_CH_TypeDef  *tmp1;
 	SPI_TypeDef  *tmp2;
 	uint32_t dma_timeout;
+	int i;
 	alb32r003x_evb_init();
 	spi_send_data_init();
 
@@ -213,6 +215,23 @@ int main(void)
 
 
 
+     //
+     // Print sent and received data (64 groups)
+     //
+     printf("SPI DMA loopback: sent=");
+     for (i = 0; i < TEST_DATA_COUNT; i++) printf("%02X ", (unsigned int)writeBuffer[i]);
+     printf(" recv=");
+     for (i = 0; i < TEST_DATA_COUNT; i++) printf("%02X ", (unsigned int)readBuffer[i]);
+     printf("\r\n");
+     //
+     // Verify received data
+     //
+     if (memcmp(readBuffer, writeBuffer, TEST_DATA_COUNT) != 0)
+     {
+         printf("SPI DMA loopback FAIL: data mismatch\r\n");
+         return SC_FAIL;
+     }
+     printf("SPI DMA loopback PASS: 64 groups verified\r\n");
      return SC_PASS;
 }
 

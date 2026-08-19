@@ -57,13 +57,13 @@
     <booleanAttribute key="org.eclipse.cdt.dsf.gdb.UPDATE_THREADLIST_ON_SUSPEND" value="false"/>
     <intAttribute key="org.eclipse.cdt.launch.ATTR_BUILD_BEFORE_LAUNCH_ATTR" value="2"/>
     <stringAttribute key="org.eclipse.cdt.launch.COREFILE_PATH" value=""/>
-    <stringAttribute key="org.eclipse.cdt.launch.PROGRAM_NAME" value="onSRAM/spi_ex06__dma.elf"/>
-    <stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="spi_ex06__dma"/>
+    <stringAttribute key="org.eclipse.cdt.launch.PROGRAM_NAME" value="onSRAM/spi4_loopback_dma.elf"/>
+    <stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="spi4_loopback_dma"/>
     <booleanAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_AUTO_ATTR" value="false"/>
     <stringAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_ID_ATTR" value=""/>
     <booleanAttribute key="org.eclipse.debug.core.ATTR_FORCE_SYSTEM_CONSOLE_ENCODING" value="false"/>
     <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-        <listEntry value="/spi_ex06__dma"/>
+        <listEntry value="/spi4_loopback_dma"/>
     </listAttribute>
     <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
         <listEntry value="4"/>

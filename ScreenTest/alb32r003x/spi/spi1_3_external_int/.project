@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>i2c4_loopback_interrupt</name>
+	<name>spi1_3_external_int</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -40,12 +40,12 @@
 			<type>2</type>
 			<locationURI>$%7BECLIPSE_HOME%7D/Packages/ALB32RT_SDK/Utilities</locationURI>
 		</link>
-		<link>
-			<name>scTest_drivers</name>
-			<type>2</type>
-			<locationURI>PARENT-3-PROJECT_LOC/scTest_drivers</locationURI>
-		</link>
-	</linkedResources>
+	        <link>
+            <name>scTest_drivers</name>
+            <type>2</type>
+            <locationURI>PARENT-3-PROJECT_LOC/scTest_drivers</locationURI>
+        </link>
+    </linkedResources>
 	<filteredResources>
 		<filter>
 			<id>0</id>

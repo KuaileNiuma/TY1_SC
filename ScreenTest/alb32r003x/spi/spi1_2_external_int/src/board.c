@@ -115,10 +115,10 @@ void INTERRUPT_init(void)
     //
     // Register and configure SPIA RX FIFO interrupt
     //
-    Interrupt_register(SPI3RX_IRQn, spiARxFIFOISR);
-    Interrupt_setPriority(SPI3RX_IRQn, 0, 0);
-    Interrupt_enable(SPI3RX_IRQn);
-    ECLIC_EnableIRQ(SPI3RX_IRQn);
+    Interrupt_register(SPI1RX_IRQn, spiARxFIFOISR);
+    Interrupt_setPriority(SPI1RX_IRQn, 0, 0);
+    Interrupt_enable(SPI1RX_IRQn);
+    ECLIC_EnableIRQ(SPI1RX_IRQn);
 }
 
 //*****************************************************************************
@@ -147,7 +147,7 @@ void SPIX_init(void)
 //*****************************************************************************
 void SPIA_peripheral_init(void)
 {
-	SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_BSPI3);
+	SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_BSPI2);
 
     //
     // Disable the SPI module before configuration
@@ -205,7 +205,7 @@ void SPIA_peripheral_init(void)
 //*****************************************************************************
 void SPIB_controller_init(void)
 {
-	SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_BSPI2);
+	SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_BSPI1);
 
     //
     // Disable the SPI module before configuration
