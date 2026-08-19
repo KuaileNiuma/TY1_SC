@@ -39,7 +39,7 @@ from pathlib import Path
 from typing import Optional
 
 DEFAULT_GDB_BIN = (
-    r"..\..\..\.."
+    r"..\..\..\..\.."
     r"\toolchain"
     r"\gcc"
     r"\bin"
@@ -66,16 +66,16 @@ PASS_RETURN_VALUE = 0x5A
 FAIL_RETURN_VALUE = 0xA5
 
 # 本地OpenOCD调试服务器配置（与工程IDE调试一致）。
-# 相对路径基于 screen_exec.py 所在目录（ScreenTest/start）解析。
+# 相对路径基于 screen_exec.py 所在目录（ScreenTest/start/screen_test）解析。
 DEFAULT_OPENOCD_BIN = (
-    r"..\..\..\.."
+    r"..\..\..\..\.."
     r"\toolchain"
     r"\openocd"
     r"\bin"
     r"\openocd.exe"
 )
 DEFAULT_OPENOCD_CFG = (
-    r"..\.."
+    r"..\..\.."
     r"\Utilities"
     r"\Scripts"
     r"\openocd_1core_sram_jlink.cfg"
@@ -667,6 +667,12 @@ def create_argument_parser(
         help="等待GDB正常退出的秒数",
     )
 
+    parser.add_argument(
+        "--pause",
+        action="store_true",
+        help="测试结束后暂停，等待按任意键退出（避免窗口自动关闭）",
+    )
+
     return parser
 
 
@@ -979,6 +985,11 @@ def main() -> int:
     # 0：所有case成功
     # 1：至少一个case失败
     # 2：配置、环境或参数错误
+
+    if arguments.pause:
+        # 用os.system pause而非input()：双击运行时stdin无效，input()会立即EOF
+        os.system("pause")
+
     if fail_count > 0:
         return 1
 

@@ -27,11 +27,9 @@ core.*
 __pycache__/
 *.pyc
 
-# screen_exec 运行产物
-ScreenTest/start/test_result_*.txt
-ScreenTest/start/gdb_logs_*/
-
-# screen_exec 输出目录
-ScreenTest/start/logs/
-ScreenTest/start/results/
-ScreenTest/start/elfs/
+# screen_exec 运行产物与输出目录
+ScreenTest/start/screen_test/test_result_*.txt
+ScreenTest/start/screen_test/gdb_logs_*/
+ScreenTest/start/screen_test/logs/
+ScreenTest/start/screen_test/results/
+ScreenTest/start/screen_test/elfs/
