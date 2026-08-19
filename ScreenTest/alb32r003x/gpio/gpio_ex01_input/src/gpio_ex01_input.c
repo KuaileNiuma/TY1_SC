@@ -38,6 +38,7 @@
 #include "device.h"
 #include "gpio.h"
 #include "alb32r003x_evb.h"
+#include "alb32r003x_screenTest.h"
 
 //*****************************************************************************
 //

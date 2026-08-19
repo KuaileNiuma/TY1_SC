@@ -42,6 +42,7 @@ extern "C"{
 #include "device.h"
 #include "cmpss_ex01_board.h"
 #include "alb32r003x_evb.h"
+#include "alb32r003x_screenTest.h"
 
 //
 // Function Prototypes

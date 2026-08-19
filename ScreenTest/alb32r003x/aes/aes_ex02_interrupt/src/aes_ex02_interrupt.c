@@ -36,6 +36,7 @@
 #include "device.h"
 #include <stdio.h>
 #include "alb32r003x_evb.h"
+#include "alb32r003x_screenTest.h"
 
 uint32_t aes_key[8];
 uint32_t aes_din[4];
@@ -111,12 +112,7 @@ int main(void)
     }
 
 
-    while(1)
-    {
-
-    }
-
-    return 0;
+    return SC_PASS;
 }
 
 

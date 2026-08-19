@@ -37,6 +37,7 @@
 #include "can_ex01_loopback.h"
 #include <string.h>
 #include "alb32r003x_evb.h"
+#include "alb32r003x_screenTest.h"
 
 #define Delay_value  100000
 #define CAN_CLK		 HSE_CLOCK
@@ -191,12 +192,6 @@ int main(void)
 	//
 	CPU_disableIrq();
 	//
-	// Configure CAN GPIO pins
-	//
-	SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_GPIOA);
-	GPIO_setPinConfig(myCAN_RX_PIN);
-	GPIO_setPinConfig(myCAN_TX_PIN);
-	//
 	// Initialize CAN controller
 	//
 	can_ctrl_init();
@@ -239,7 +234,7 @@ int main(void)
 		if (!can_rx_ready)
 		{
 			printf("CAN loopback FAIL: no response at frame %u\r\n", (unsigned int)i);
-			return 1;
+			return SC_FAIL;
 		}
 		can_rx_ready = 0;
 		//
@@ -260,12 +255,12 @@ int main(void)
 			(memcmp(RxMsgBuf.data, TxMsgBuf.data, CAN_getMessageLength(TxMsgBuf.dlc)) != 0))
 		{
 			printf("CAN loopback FAIL: data mismatch at frame %u\r\n", (unsigned int)i);
-			return 1;
+			return SC_FAIL;
 		}
 	}
 	//
 	// All 64 groups verified OK
 	//
 	printf("CAN loopback PASS: 64 frames verified\r\n");
-	return 0;   //!< Return 0 means the test passed
+	return SC_PASS;   //!< Test passed
 }

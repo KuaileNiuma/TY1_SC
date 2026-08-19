@@ -114,6 +114,7 @@
 */
 
 #include "eqep_ex03_calculation.h"
+#include "alb32r003x_screenTest.h"
 //#include "iQmathLib.h"
 
 //*****************************************************************************

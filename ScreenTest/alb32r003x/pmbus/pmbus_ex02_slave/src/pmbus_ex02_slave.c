@@ -40,6 +40,7 @@
 #include "debug.h"
 #include "interrupt.h"
 #include "pmbus.h"
+#include "alb32r003x_screenTest.h"
 
 #define myI2C_BASE	I2C1_BASE
 
@@ -167,8 +168,6 @@ int main(void) {
 		while (1) {
 		};
 	}
-	while (1) {
-	}
-	return 0;
+	return SC_PASS;
 
 }

@@ -36,6 +36,7 @@
 
 #include "alb32r003x_evb.h"
 #include "adc_ex06_board.h"
+#include "alb32r003x_screenTest.h"
 
 //*****************************************************************************
 //

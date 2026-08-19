@@ -36,6 +36,7 @@
 #include <stdio.h>
 #include "device.h"
 #include "alb32r003x_evb.h"
+#include "alb32r003x_screenTest.h"
 //*****************************************************************************
 //
 // Macros & Typedefs
@@ -127,8 +128,5 @@ int main(void)
     //
     // Main loop - implements LIN master echo functionality
     //
-    while(1)
-    {
-
-    }
+    return SC_PASS;
 }

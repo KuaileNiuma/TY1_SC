@@ -35,6 +35,7 @@
  */
 #include "alb32r003x_evb.h"
 #include "dma_ex04_adc_init.h"
+#include "alb32r003x_screenTest.h"
 
 //*****************************************************************************
 //

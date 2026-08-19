@@ -37,6 +37,7 @@
 #include <stdio.h>
 #include "device.h"
 #include "alb32r003x_evb.h"
+#include "alb32r003x_screenTest.h"
 //*****************************************************************************
 //
 // Macros & Typedefs

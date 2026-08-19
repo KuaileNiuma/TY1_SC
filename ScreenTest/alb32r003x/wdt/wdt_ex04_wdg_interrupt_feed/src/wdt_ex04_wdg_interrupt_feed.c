@@ -38,6 +38,7 @@
 #include "device.h"
 #include "wdt.h"
 #include "alb32r003x_evb.h"
+#include "alb32r003x_screenTest.h"
 //*****************************************************************************
 //
 // Global Variables
@@ -197,5 +198,5 @@ int main(void)
     //
     // Infinite loop (will not be reached)
     //
-    for(;;);
+    return SC_PASS;
 }

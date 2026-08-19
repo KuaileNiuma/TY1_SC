@@ -36,6 +36,7 @@
 #include "device.h"
 #include "alb32r003x_evb.h"
 #include <stdlib.h>
+#include "alb32r003x_screenTest.h"
 
 //*****************************************************************************
 //
@@ -204,7 +205,7 @@ int ECAP_checkTestTimeStamp(uint32_t ecapBase)
     if(abs(CapVal-EXPECT_VAL) > ErrorRange)
     	ret = FAIL;
 
-    return ret;
+    return (ret == 0) ? SC_PASS : SC_FAIL;
 }
 
 int ECAP_CaptureEventPolarity_poll(void)
@@ -222,7 +223,7 @@ int ECAP_CaptureEventPolarity_poll(void)
 
     ret = ECAP_checkTestTimeStamp(ECAP1_BASE);
 
-    return ret;
+    return (ret == 0) ? SC_PASS : SC_FAIL;
 }
 
 

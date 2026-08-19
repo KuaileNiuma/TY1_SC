@@ -38,6 +38,7 @@
 #include "alb32r003x_evb.h"
 
 #include "sdfm_ex02_filter_sync_dmaread_board.h"
+#include "alb32r003x_screenTest.h"
 
 #define MAX_SAMPLES               1024  //!< Maximum number of samples to collect
 
@@ -93,11 +94,7 @@ int main(void)
     CPU_enableIrq();
 
 
-    while (1) {
-
-    }
-
-    return 0;
+    return SC_PASS;
 }
 
 //*****************************************************************************

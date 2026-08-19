@@ -40,6 +40,7 @@
 #include "timer.h"
 #include "interrupt.h"
 #include "alb32r003x_evb.h"
+#include "alb32r003x_screenTest.h"
 
 //*****************************************************************************
 //
@@ -275,8 +276,5 @@ int main(void)
     //
     // Infinite loop
     //
-    while(1)
-    {
-
-    }
+    return SC_PASS;
 }

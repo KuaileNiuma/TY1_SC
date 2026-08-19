@@ -41,6 +41,7 @@
 #include "interrupt.h"
 #include "alb32r003x_evb.h"
 #include "pmbus.h"
+#include "alb32r003x_screenTest.h"
 
 
 #define myI2C_BASE	I2C1_BASE
@@ -164,5 +165,5 @@ int main(void)
 
         printf("pmbus master read test end...\n\n");
     }
-    return 0;
+    return SC_PASS;
 }

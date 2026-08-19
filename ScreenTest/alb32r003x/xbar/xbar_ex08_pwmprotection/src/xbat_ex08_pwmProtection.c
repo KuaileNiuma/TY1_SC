@@ -35,6 +35,7 @@
  */
 #include "device.h"
 #include "alb32r003x_evb.h"
+#include "alb32r003x_screenTest.h"
 
 #define GPIO_TO_EPWM_NUM 33
 

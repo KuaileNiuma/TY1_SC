@@ -37,6 +37,7 @@
 #include "alb32r003x_evb.h"
 #include <stdio.h>
 #include "device.h"
+#include "alb32r003x_screenTest.h"
 
 //*****************************************************************************
 //
@@ -122,7 +123,7 @@ static void srcData_init(void)
 // Main function
 //
 //*****************************************************************************
-void main(void)
+int main(void)
 {
     alb32r003x_evb_init();
     printf("DMA EXT01 M2M.\r\n");
@@ -141,10 +142,7 @@ void main(void)
     //
     // Loop indefinitely
     //
-    while (1)
-    {
-
-    }
+    return SC_PASS;
 }
 
 #ifdef __cplusplus

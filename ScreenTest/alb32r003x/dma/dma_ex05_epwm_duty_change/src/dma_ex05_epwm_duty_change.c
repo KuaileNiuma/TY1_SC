@@ -37,6 +37,7 @@
 #include "alb32r003x_evb.h"
 #include <stdio.h>
 #include "device.h"
+#include "alb32r003x_screenTest.h"
 
 //*****************************************************************************
 //
@@ -261,7 +262,7 @@ static void data_init(int num)
 //  and enters an infinite loop.
 //
 //*****************************************************************************
-void main(void)
+int main(void)
 {
     alb32r003x_evb_init();
     printf("DMA EXT05 EPWM DUTY CHANGE.\r\n");
@@ -289,7 +290,5 @@ void main(void)
     //
     // Infinite loop
     //
-    while (1)
-    {
-    }
+    return SC_PASS;
 }

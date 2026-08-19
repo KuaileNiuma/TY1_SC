@@ -37,6 +37,7 @@
 #include "wdt_ex01_wdg_reset.h"
 #include <stdio.h>
 #include "alb32r003x_evb.h"
+#include "alb32r003x_screenTest.h"
 
 //*****************************************************************************
 //
@@ -125,5 +126,5 @@ int main(void)
     //
     // Infinite loop (will not be reached due to WDT reset)
     //
-    for(;;);
+    return SC_PASS;
 }

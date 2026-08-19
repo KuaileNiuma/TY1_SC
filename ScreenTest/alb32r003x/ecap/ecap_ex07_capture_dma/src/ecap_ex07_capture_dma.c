@@ -37,6 +37,7 @@
 #include "alb32r003x_evb.h"
 #include "ecap_ex07_board.h"
 #include "stdio.h"
+#include "alb32r003x_screenTest.h"
 
 //*****************************************************************************
 //
@@ -216,7 +217,7 @@ static void initDMA(void)
 //  and DMA for ECAP capture, and then enters the main application loop.
 //
 //*****************************************************************************
-void main(void)
+int main(void)
 {
     uint8_t status = 0;
     uint8_t reload_cnt = 0;
@@ -281,9 +282,7 @@ void main(void)
     //
     // Main application loop - read ECAP events continuously
     //
-    while (1)
-    {
-    }
+    return SC_PASS;
 }
 
 

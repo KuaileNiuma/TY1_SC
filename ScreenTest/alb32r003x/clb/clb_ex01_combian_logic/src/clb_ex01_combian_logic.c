@@ -43,6 +43,7 @@
 
 #include "clb_ex01_board.h"
 #include "clb_ex01_config.h"
+#include "alb32r003x_screenTest.h"
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */
@@ -86,10 +87,6 @@ int main(void)
 	XBAR_setOutputMuxConfig(CLBOUTPUTXBAR_BASE, XBAR_OUTPUT2,XBAR_OUT_MUX02_CLB1_OUT2);
 	XBAR_enableOutputMux(CLBOUTPUTXBAR_BASE, XBAR_OUTPUT2, XBAR_MUX02);
 
-	while (1) {
-
-	}
-
-	return 0;
+	return SC_PASS;
 }
 

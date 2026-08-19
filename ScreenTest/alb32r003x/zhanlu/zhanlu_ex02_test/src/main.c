@@ -38,6 +38,7 @@
 #include "device.h"
 #include <math.h>
 #include "zhanlu_cycle_test.h"
+#include "alb32r003x_screenTest.h"
 
 //*****************************************************************************
 //
@@ -178,9 +179,6 @@ int main(void)
 
     zhanlu_cycle_test();
 
-    while(1){
-    }
-
-    return 0;
+    return SC_PASS;
 }
 

@@ -35,6 +35,7 @@
  */
 
 #include "alb32r003x_evb.h"
+#include "alb32r003x_screenTest.h"
 
 typedef struct {
     uint32_t WWDG_Prescaler;   //!< WWDT prescaler value
@@ -165,5 +166,5 @@ int main(void)
     // Infinite loop
     // WWDT is fed in the interrupt handler
     //
-    for(;;);
+    return SC_PASS;
 }

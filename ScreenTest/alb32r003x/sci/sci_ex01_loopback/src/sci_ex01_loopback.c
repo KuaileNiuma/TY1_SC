@@ -37,6 +37,7 @@
 #include "alb32r003x_evb.h"
 #include <stdio.h>
 #include "device.h"
+#include "alb32r003x_screenTest.h"
 
 //*****************************************************************************
 //
@@ -59,7 +60,7 @@ uint8_t rcv_data[SEND_DATA_LEN];          //!< Data buffer for reception
 // SCI Loopback Verification Function
 // 
 //*****************************************************************************
-void SCI_pc_verify(uint32_t SCI_base)
+int SCI_pc_verify(uint32_t SCI_base)
 {
     uint32_t i = 0;
     //
@@ -108,10 +109,11 @@ void SCI_pc_verify(uint32_t SCI_base)
         if (send_data[i] != rcv_data[i])
         {
             printf("SCIBASE=0x%08x loopback test fail send_data %d rcv_data %d \r\n", SCI_base, send_data[i], rcv_data[i]);
-            return;
+            return -1;
         }
     }
     printf("SCIBASE=0x%08X loopback test OK \r\n", SCI_base);
+    return SC_PASS;
 }
 
 //*****************************************************************************
@@ -141,23 +143,24 @@ void UART_init(uint32_t SCIBase, uint32_t clk, uint32_t baud)
     SCI_setFIFOInterruptLevel(SCIBase, SCI_FIFO_TX0, SCI_FIFO_RX1);
 }
 
+
 //*****************************************************************************
 //
-// SCI Loopback Test Function
-// 
+// Main function
+//
 //*****************************************************************************
-void sci_ex01_loopback(void)
+int main(void)
 {
+	int ret=0;
+
+    alb32r003x_evb_init();
+    //
+    // Initialize interrupt as CLINT interrupt mode, see MTVEC register description
+    //
     //
     // Print test start message
     //
     printf("SCI_ex01_loopback start \r\n");
-    
-    //
-    // Configure GPIO pins for SCI communication
-    //
-    GPIO_setPinConfig(GPIO_48_SCIA_TX);
-    GPIO_setPinConfig(GPIO_49_SCIA_RX);
     
     //
     // Initialize UART with 20MHz clock and 115200 baud rate
@@ -167,36 +170,12 @@ void sci_ex01_loopback(void)
     //
     // Perform loopback verification test
     //
-    SCI_pc_verify(g_SCI_base);
-
-    //
-    // Enable global interrupts
-    //
-    CPU_enableIrq();
+    ret = SCI_pc_verify(g_SCI_base);
 
     //
     // Print test end message
     //
     printf("SCI_ex01_loopback end \r\n");
-}
 
-//*****************************************************************************
-//
-// Main function
-// 
-//*****************************************************************************
-void main(void)
-{
-    alb32r003x_evb_init();
-    //
-    // Initialize interrupt as CLINT interrupt mode, see MTVEC register description
-    //
-    sci_ex01_loopback();
-
-    //
-    // Infinite loop to prevent program termination
-    //
-    while(1)
-    {
-    }
+    return (ret == SC_PASS) ? SC_PASS : SC_FAIL;
 }

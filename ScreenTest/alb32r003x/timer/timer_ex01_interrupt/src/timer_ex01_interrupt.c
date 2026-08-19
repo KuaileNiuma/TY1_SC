@@ -43,6 +43,7 @@
 #include "cpufeature.h"
 
 #include "mytimer.h"
+#include "alb32r003x_screenTest.h"
 
 
 //*****************************************************************************
@@ -207,5 +208,5 @@ int main(void)
     //
     // Infinite loop
     //
-    for(;;);
+    return SC_PASS;
 }

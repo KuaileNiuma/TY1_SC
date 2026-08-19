@@ -37,6 +37,7 @@
 #include <stdio.h>
 #include "device.h"
 #include <math.h>
+#include "alb32r003x_screenTest.h"
 
 //*****************************************************************************
 //
@@ -63,8 +64,6 @@ int main(void)
     // Infinite loop to prevent the program from exiting
     //
     printf("test end\r\n");
-    while (1);
-
-    return 0;
+    return SC_PASS;
 }
 

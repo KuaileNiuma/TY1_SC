@@ -42,6 +42,7 @@
 #include "interrupt.h"
 #include "xbar.h"
 #include "alb32r003x_evb.h"
+#include "alb32r003x_screenTest.h"
 
 
 void gpio_led_init(void)

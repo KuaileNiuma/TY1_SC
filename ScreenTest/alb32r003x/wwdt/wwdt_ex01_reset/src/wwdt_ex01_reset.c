@@ -35,6 +35,7 @@
  */
  
 #include "alb32r003x_evb.h"
+#include "alb32r003x_screenTest.h"
 
 
 typedef struct {
@@ -128,5 +129,5 @@ int main(void)
     //
     // Infinite loop (will not be reached due to WWDT reset)
     //
-    for(;;);
+    return SC_PASS;
 }

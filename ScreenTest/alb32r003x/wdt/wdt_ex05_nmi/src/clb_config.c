@@ -36,6 +36,7 @@
  
 #include "clb_config.h"
 #include "clb.h"
+#include "alb32r003x_screenTest.h"
 
 
 const uint32_t TILE1_HLC_initFIFOData_134[4] = {TILE1_HLC_FIFO0_INIT, TILE1_HLC_FIFO1_INIT, TILE1_HLC_FIFO2_INIT, TILE1_HLC_FIFO3_INIT};

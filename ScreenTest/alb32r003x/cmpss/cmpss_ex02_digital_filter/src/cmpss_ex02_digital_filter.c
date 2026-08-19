@@ -37,11 +37,12 @@
 #include "alb32r003x_evb.h"
 #include "cmpss_ex02_board.h"
 #include <stdio.h>
+#include "alb32r003x_screenTest.h"
 
 //
 // Main
 //
-void main(void)
+int main(void)
 {
 	alb32r003x_evb_init();
 
@@ -67,8 +68,5 @@ void main(void)
     //
     // Loop indefinitely
     //
-    while(1)
-    {
-
-    }
+    return SC_PASS;
 }

@@ -35,6 +35,7 @@
  */
 #include "alb32r003x_evb.h"
 #include "dma_ex03_adc_init.h"
+#include "alb32r003x_screenTest.h"
 
 //*****************************************************************************
 //
@@ -117,7 +118,7 @@ void myDMAInit(void)
 // main - Application entry point
 //
 //*****************************************************************************
-void main(void)
+int main(void)
 {
     alb32r003x_evb_init();
     printf("DMA EXT03 ADC CH1.\r\n");
@@ -140,8 +141,5 @@ void main(void)
     //
     // Loop indefinitely
     //
-    while (1)
-    {
-
-    }
+    return SC_PASS;
 }

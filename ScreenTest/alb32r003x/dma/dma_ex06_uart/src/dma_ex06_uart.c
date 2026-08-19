@@ -37,6 +37,7 @@
 #include "alb32r003x_evb.h"
 #include <stdio.h>
 #include "device.h"
+#include "alb32r003x_screenTest.h"
 
 //*****************************************************************************
 //
@@ -227,7 +228,7 @@ static void sci_ex06_dma(void)
 //  with DMA for both transmission and reception, and enters an infinite loop.
 //
 //*****************************************************************************
-void main(void)
+int main(void)
 {
     alb32r003x_evb_init();
     printf("DMA EXT06 UART.\r\n");
@@ -249,7 +250,5 @@ void main(void)
     //
     // Infinite loop
     //
-    while (1)
-    {
-    }
+    return SC_PASS;
 }

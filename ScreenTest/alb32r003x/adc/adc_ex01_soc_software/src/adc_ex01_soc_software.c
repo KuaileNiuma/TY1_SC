@@ -35,6 +35,7 @@
  */
 #include "adc_ex01_board.h"
 #include "alb32r003x_evb.h"
+#include "alb32r003x_screenTest.h"
 
 uint16_t myADC0Result0[128] = {0};
 uint16_t myADC0Result1[128] = {0};
@@ -122,10 +123,6 @@ int main(void)
 
     adc_ex1_soc_software();
 
-    while (1)
-    {
-
-    }
-    return 0;
+    return SC_PASS;
 }
 

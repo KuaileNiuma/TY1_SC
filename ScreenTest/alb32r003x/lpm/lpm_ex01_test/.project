@@ -78,6 +78,11 @@
             		
         </link>
         	
+    	        <link>
+            <name>scTest_drivers</name>
+            <type>2</type>
+            <locationURI>PARENT-3-PROJECT_LOC/scTest_drivers</locationURI>
+        </link>
     </linkedResources>
     	
     <filteredResources>

@@ -37,6 +37,7 @@
 #include "device.h"
 #include "clb.h"
 #include "clb_ex05_config.h"
+#include "alb32r003x_screenTest.h"
 
 
 const uint32_t TILE1_HLC_initFIFOData[4] = {TILE1_HLC_FIFO0_INIT, TILE1_HLC_FIFO1_INIT, TILE1_HLC_FIFO2_INIT, TILE1_HLC_FIFO3_INIT};
