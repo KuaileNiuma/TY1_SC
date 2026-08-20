@@ -1,4 +1,4 @@
-## usart_ex04_dma
+## usart1_loopback_dma
 
 ### 1 概述
 本例程展示了使用USART1以DMA方式收发数据并启用了FIFO模式的功能。

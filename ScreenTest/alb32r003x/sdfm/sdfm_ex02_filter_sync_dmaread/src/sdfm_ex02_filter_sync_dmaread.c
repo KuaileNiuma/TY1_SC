@@ -93,7 +93,40 @@ int main(void)
     //
     CPU_enableIrq();
 
+    //
+    // Wait for DMA transfer to complete (give SDFM time to fill buffers)
+    //
+    delay_ms(10);
 
+    //
+    // Check whether the DMA target buffers are all zero.
+    // If the DMA never moved data (e.g. no SDFM input signal), all buffers
+    // remain zero and the test returns SC_FAIL.
+    //
+    {
+        uint32_t i;
+        uint32_t allZero = 1;
+
+        for (i = 0; i < RESULTS_BUFFER_SIZE; i++)
+        {
+            if (mySDFilter1DataBuffer[i] != 0 ||
+                mySDFilter2DataBuffer[i] != 0 ||
+                mySDFilter3DataBuffer[i] != 0 ||
+                mySDFilter4DataBuffer[i] != 0)
+            {
+                allZero = 0;
+                break;
+            }
+        }
+
+        if (allZero)
+        {
+            printf("SDFM DMA read fail: target buffer all zero\r\n");
+            return SC_FAIL;
+        }
+    }
+
+    printf("SDFM DMA read OK\r\n");
     return SC_PASS;
 }
 

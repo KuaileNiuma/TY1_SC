@@ -1,7 +1,7 @@
 /**
  *************************************************************************************
- * @file lin_ex05_tx_dma.c
- * @brief This file contains the source file for example lin_ex05_tx_dma.
+ * @file usart1_loopback_dma.c
+ * @brief This file contains the source file for example usart1_loopback_dma.
  * @version 1.0.0
  *************************************************************************************
  * @copyright Copyright (c) 2025 Albatross Semiconductor(Hangzhou) Co.,Ltd.
@@ -35,6 +35,7 @@
  */
 
 #include <stdio.h>
+#include <string.h>
 #include "device.h"
 #include "alb32r003x_evb.h"
 #include "alb32r003x_screenTest.h"
@@ -93,9 +94,11 @@ static void usart_tx_dma_init(void)
     SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_DMA1);
     SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_DMASCH);
     //
-    //Turn on the DMA1 & DMASCH peripheral clock
+    // Note: do NOT call DMA_disableModule/enableModule here because
+    // DMA1 is shared by CH1(TX) and CH2(RX). RX (CH2) is already
+    // running when TX is initialized; disabling the module would
+    // also stop RX and corrupt the received data.
     //
-    DMA_disableModule(DMA1_CH1_BASE);
     DMA_stopChannel(DMA1_CH1_BASE);
     DMA_DeConfChannel(DMA1_CH1_BASE);
     DMA_disableInterrupt(DMA1_CH1_BASE);
@@ -119,7 +122,6 @@ static void usart_tx_dma_init(void)
     // Apply DMA channel configuration and start
     //
     DMA_configChannel(DMA1_CH1_BASE, &dmaCfg);
-	DMA_enableModule(DMA1_CH1_BASE);
     DMA_startChannel(DMA1_CH1_BASE);
 }
 
@@ -143,7 +145,6 @@ static void usart_rx_dma_init(void)
     //
     //Turn on the DMA1 & DMASCH peripheral clock
     //
-    DMA_disableModule(DMA1_CH2_BASE);
     DMA_stopChannel(DMA1_CH2_BASE);
     DMA_DeConfChannel(DMA1_CH2_BASE);
     DMA_disableInterrupt(DMA1_CH2_BASE);
@@ -192,8 +193,7 @@ void usart_init(uint32_t Base, uint32_t baud)
 	USART_InitStruct.USART_StopBits = USART_StopBits_1;
 	USART_InitStruct.USART_WordLength = USART_WordLength_8b;
     //
-    //Turn on the USART1 peripheral clock	USART_InitStruct.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-
+    //Turn on the USART1 peripheral clock
     //
     SysCtl_enablePeripheral(my_USART_CLK_EN);
 	//
@@ -209,7 +209,7 @@ void usart_init(uint32_t Base, uint32_t baud)
 // USART TX DMA Example Initialization Function
 // 
 //*****************************************************************************
-void usart_ex04_dma(void)
+void usart1_loopback_dma(void)
 {
     //
     // Configure GPIO pins for USART communication
@@ -243,19 +243,42 @@ int main(void)
     //
     // Initialize USART TX DMA example
     //
-    usart_ex04_dma();
+    usart1_loopback_dma();
 
-    usart_tx_dma_init();
-    while((DMA_getRawInterruptStatus(DMA1_CH1_BASE) & DMA_INT_TFR) == 0);
     usart_rx_dma_init();
+    usart_tx_dma_init();
+
+    //
+    // Clear any stale transfer-complete flags before waiting,
+    // otherwise the wait loops below could pass immediately.
+    //
+    DMA_clearInterrupt(DMA1_CH1_BASE, DMA_INT_TFR);
+    DMA_clearInterrupt(DMA1_CH2_BASE, DMA_INT_TFR);
+
+    while((DMA_getRawInterruptStatus(DMA1_CH1_BASE) & DMA_INT_TFR) == 0);
     while((DMA_getRawInterruptStatus(DMA1_CH2_BASE) & DMA_INT_TFR) == 0);
+
     //
-    // Main loop - application remains here
+    // Compare sent data with received data
     //
-    while(1)
+    if (memcmp(send_data, rcv_data, SEND_DATA_LEN) == 0)
     {
-        //
-        // Application can add additional tasks here
-        //
+        printf("USART1 DMA LOOPBACK. all %d data matched\r\n", SEND_DATA_LEN);
+        return SC_PASS;
+    }
+    else
+    {
+        uint32_t i;
+        for (i = 0; i < SEND_DATA_LEN; i++)
+        {
+            if (send_data[i] != rcv_data[i])
+            {
+                printf("USART1 DMA LOOPBACK. mismatch index %d sent 0x%02x recv 0x%02x\r\n",
+                       i, send_data[i], rcv_data[i]);
+                break;
+            }
+        }
+        printf("USART1 DMA LOOPBACK. FAIL\r\n");
+        return SC_FAIL;
     }
 }

@@ -41,30 +41,30 @@
 //
 // SDFM1 SD1_C1 - GPIO Settings
 //
-#define GPIO_PIN_SDFM1_C1 17              //!< SDFM1 Filter 1 Clock pin
-#define mySDFM1_SDFM1C1_GPIO 17           //!< SDFM1 Filter 1 Clock GPIO number
-#define mySDFM1_SDFM1C1_PIN_CONFIG GPIO_17_SD1_C1  //!< SDFM1 Filter 1 Clock pin configuration
+#define GPIO_PIN_SDFM1_C1 49              //!< SDFM1 Filter 1 Clock pin
+#define mySDFM1_SDFM1C1_GPIO 49           //!< SDFM1 Filter 1 Clock GPIO number
+#define mySDFM1_SDFM1C1_PIN_CONFIG GPIO_49_SD1_C1  //!< SDFM1 Filter 1 Clock pin configuration
 
 //
 // SDFM1 SD1_D1 - GPIO Settings
 //
-#define GPIO_PIN_SDFM1_D1 16              //!< SDFM1 Filter 1 Data pin
-#define mySDFM1_SDFM1D1_GPIO 16           //!< SDFM1 Filter 1 Data GPIO number
-#define mySDFM1_SDFM1D1_PIN_CONFIG GPIO_16_SD1_D1  //!< SDFM1 Filter 1 Data pin configuration
+#define GPIO_PIN_SDFM1_D1 48              //!< SDFM1 Filter 1 Data pin
+#define mySDFM1_SDFM1D1_GPIO 48           //!< SDFM1 Filter 1 Data GPIO number
+#define mySDFM1_SDFM1D1_PIN_CONFIG GPIO_48_SD1_D1  //!< SDFM1 Filter 1 Data pin configuration
 
 
 // SDFM1 SD1_C2 - GPIO Settings
 //
-#define GPIO_PIN_SDFM1_C2 33              //!< SDFM1 Filter 2 Clock pin
-#define mySDFM1_SDFM1C2_GPIO 33           //!< SDFM1 Filter 2 Clock GPIO number
-#define mySDFM1_SDFM1C2_PIN_CONFIG GPIO_33_SD1_C2  //!< SDFM1 Filter 2 Clock pin configuration
+#define GPIO_PIN_SDFM1_C2 51              //!< SDFM1 Filter 2 Clock pin
+#define mySDFM1_SDFM1C2_GPIO 51           //!< SDFM1 Filter 2 Clock GPIO number
+#define mySDFM1_SDFM1C2_PIN_CONFIG GPIO_51_SD1_C2  //!< SDFM1 Filter 2 Clock pin configuration
 
 //
 // SDFM1 SD1_D2 - GPIO Settings
 //
-#define GPIO_PIN_SDFM1_D2 32              //!< SDFM1 Filter 2 Data pin
-#define mySDFM1_SDFM1D2_GPIO 32           //!< SDFM1 Filter 2 Data GPIO number
-#define mySDFM1_SDFM1D2_PIN_CONFIG GPIO_32_SD1_D2  //!< SDFM1 Filter 2 Data pin configuration
+#define GPIO_PIN_SDFM1_D2 50              //!< SDFM1 Filter 2 Data pin
+#define mySDFM1_SDFM1D2_GPIO 50           //!< SDFM1 Filter 2 Data GPIO number
+#define mySDFM1_SDFM1D2_PIN_CONFIG GPIO_50_SD1_D2  //!< SDFM1 Filter 2 Data pin configuration
 
 
 //
@@ -84,16 +84,16 @@
 //
 // SDFM1 SD1_C4 - GPIO Settings
 //
-#define GPIO_PIN_SDFM1_C4 23              //!< SDFM1 Filter 4 Clock pin
-#define mySDFM1_SDFM1C4_GPIO 23           //!< SDFM1 Filter 4 Clock GPIO number
-#define mySDFM1_SDFM1C4_PIN_CONFIG GPIO_23_SD1_C4  //!< SDFM1 Filter 4 Clock pin configuration
+#define GPIO_PIN_SDFM1_C4 55              //!< SDFM1 Filter 4 Clock pin
+#define mySDFM1_SDFM1C4_GPIO 55           //!< SDFM1 Filter 4 Clock GPIO number
+#define mySDFM1_SDFM1C4_PIN_CONFIG GPIO_55_SD1_C4  //!< SDFM1 Filter 4 Clock pin configuration
 
 //
 // SDFM1 SD1_D4 - GPIO Settings
 //
-#define GPIO_PIN_SDFM1_D4 22              //!< SDFM1 Filter 4 Data pin
-#define mySDFM1_SDFM1D4_GPIO 22           //!< SDFM1 Filter 4 Data GPIO number
-#define mySDFM1_SDFM1D4_PIN_CONFIG GPIO_22_SD1_D4  //!< SDFM1 Filter 4 Data pin configuration
+#define GPIO_PIN_SDFM1_D4 54              //!< SDFM1 Filter 4 Data pin
+#define mySDFM1_SDFM1D4_GPIO 54           //!< SDFM1 Filter 4 Data GPIO number
+#define mySDFM1_SDFM1D4_PIN_CONFIG GPIO_54_SD1_D4  //!< SDFM1 Filter 4 Data pin configuration
 
 
 //
@@ -112,35 +112,35 @@
 
 // SDFM2 SD2_C2 - GPIO Settings
 //
-#define GPIO_PIN_SDFM2_C2 58                    //!< SDFM2 Channel 2 clock pin number
-#define mySDFM2_SDFM2C2_GPIO 58                 //!< SDFM2 Channel 2 clock GPIO number
-#define mySDFM2_SDFM2C2_PIN_CONFIG GPIO_58_SD2_C2 //!< SDFM2 Channel 2 clock pin configuration
+#define GPIO_PIN_SDFM2_C2 59                    //!< SDFM2 Channel 2 clock pin number
+#define mySDFM2_SDFM2C2_GPIO 59                 //!< SDFM2 Channel 2 clock GPIO number
+#define mySDFM2_SDFM2C2_PIN_CONFIG GPIO_59_SD2_C2 //!< SDFM2 Channel 2 clock pin configuration
 //
 // SDFM2 SD2_D2 - GPIO Settings
 //
-#define GPIO_PIN_SDFM2_D2 26                    //!< SDFM2 Channel 2 data pin number
-#define mySDFM2_SDFM2D2_GPIO 26                 //!< SDFM2 Channel 2 data GPIO number
-#define mySDFM2_SDFM2D2_PIN_CONFIG GPIO_26_SD2_D2 //!< SDFM2 Channel 2 data pin configuration
+#define GPIO_PIN_SDFM2_D2 58                    //!< SDFM2 Channel 2 data pin number
+#define mySDFM2_SDFM2D2_GPIO 58                 //!< SDFM2 Channel 2 data GPIO number
+#define mySDFM2_SDFM2D2_PIN_CONFIG GPIO_58_SD2_D2 //!< SDFM2 Channel 2 data pin configuration
 
 //
 // SDFM2 SD2_C3 - GPIO Settings
 //
-#define GPIO_PIN_SDFM2_C3 59                    //!< SDFM2 Channel 3 clock pin number
-#define mySDFM2_SDFM2C3_GPIO 59                 //!< SDFM2 Channel 3 clock GPIO number
-#define mySDFM2_SDFM2C3_PIN_CONFIG GPIO_59_SD2_C3 //!< SDFM2 Channel 3 clock pin configuration
+#define GPIO_PIN_SDFM2_C3 61                    //!< SDFM2 Channel 3 clock pin number
+#define mySDFM2_SDFM2C3_GPIO 61                 //!< SDFM2 Channel 3 clock GPIO number
+#define mySDFM2_SDFM2C3_PIN_CONFIG GPIO_61_SD2_C3 //!< SDFM2 Channel 3 clock pin configuration
 //
 // SDFM2 SD2_D3 - GPIO Settings
 //
-#define GPIO_PIN_SDFM2_D3 51                    //!< SDFM2 Channel 3 data pin number
-#define mySDFM2_SDFM2D3_GPIO 51                 //!< SDFM2 Channel 3 data GPIO number
-#define mySDFM2_SDFM2D3_PIN_CONFIG GPIO_51_SD2_D3 //!< SDFM2 Channel 3 data pin configuration
+#define GPIO_PIN_SDFM2_D3 60                    //!< SDFM2 Channel 3 data pin number
+#define mySDFM2_SDFM2D3_GPIO 60                 //!< SDFM2 Channel 3 data GPIO number
+#define mySDFM2_SDFM2D3_PIN_CONFIG GPIO_60_SD2_D3 //!< SDFM2 Channel 3 data pin configuration
 
 //
 // SDFM2 SD2_C4 - GPIO Settings
 //
-#define GPIO_PIN_SDFM2_C4 60                    //!< SDFM2 Channel 4 clock pin number
-#define mySDFM2_SDFM2C4_GPIO 60                 //!< SDFM2 Channel 4 clock GPIO number
-#define mySDFM2_SDFM2C4_PIN_CONFIG GPIO_60_SD2_C4 //!< SDFM2 Channel 4 clock pin configuration
+#define GPIO_PIN_SDFM2_C4 31                    //!< SDFM2 Channel 4 clock pin number
+#define mySDFM2_SDFM2C4_GPIO 31                 //!< SDFM2 Channel 4 clock GPIO number
+#define mySDFM2_SDFM2C4_PIN_CONFIG GPIO_31_SD2_C4 //!< SDFM2 Channel 4 clock pin configuration
 
 //
 // SDFM2 SD2_D4 - GPIO Settings
@@ -149,9 +149,6 @@
 #define mySDFM2_SDFM2D4_GPIO 30                 //!< SDFM2 Channel 4 data GPIO number
 #define mySDFM2_SDFM2D4_PIN_CONFIG GPIO_30_SD2_D4 //!< SDFM2 Channel 4 data pin configuration
 
-
-#define RESULTS_BUFFER_SIZE     (512)  //!< Size of the data buffer for storing SDFM results
-#define CHECK_SIZE              (32)     //!< Size of data chunk to check for validation
 
 uint16_t mySDFilter1DataBuffer[RESULTS_BUFFER_SIZE + CHECK_SIZE];
 uint16_t mySDFilter2DataBuffer[RESULTS_BUFFER_SIZE + CHECK_SIZE];

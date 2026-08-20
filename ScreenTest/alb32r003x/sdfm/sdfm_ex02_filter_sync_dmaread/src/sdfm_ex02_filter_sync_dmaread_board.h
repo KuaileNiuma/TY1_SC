@@ -41,6 +41,24 @@
 
 //*****************************************************************************
 //
+// Macros
+//
+//*****************************************************************************
+#define RESULTS_BUFFER_SIZE     (512)  //!< Size of the data buffer for storing SDFM results
+#define CHECK_SIZE              (32)     //!< Size of data chunk to check for validation
+
+//*****************************************************************************
+//
+// Global Variables (DMA target buffers)
+//
+//*****************************************************************************
+extern uint16_t mySDFilter1DataBuffer[RESULTS_BUFFER_SIZE + CHECK_SIZE];
+extern uint16_t mySDFilter2DataBuffer[RESULTS_BUFFER_SIZE + CHECK_SIZE];
+extern uint16_t mySDFilter3DataBuffer[RESULTS_BUFFER_SIZE + CHECK_SIZE];
+extern uint16_t mySDFilter4DataBuffer[RESULTS_BUFFER_SIZE + CHECK_SIZE];
+
+//*****************************************************************************
+//
 // Function Prototypes
 //
 //*****************************************************************************

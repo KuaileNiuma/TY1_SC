@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>usart_ex04_dma</name>
+	<name>usart2_loopback_dma</name>
 	<comment></comment>
 	<projects>
 	</projects>
