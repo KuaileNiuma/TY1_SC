@@ -9,6 +9,7 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include src/subdir.mk
+-include scTest_drivers/subdir.mk
 -include Drivers/DriverLib/cpu/startup/subdir.mk
 -include Drivers/DriverLib/cpu/subdir.mk
 -include Drivers/DriverLib/subdir.mk

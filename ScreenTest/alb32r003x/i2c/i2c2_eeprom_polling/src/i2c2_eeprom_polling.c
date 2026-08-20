@@ -139,12 +139,12 @@ void I2C_GPIO_init(void)
     //
     // Configure GPIO pins for I2C SDA and SCL
     //
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_GPIOA);
     SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_GPIOB);
-    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_GPIOC);
 	SysCtl_setGPIOxPullEnable(34 ,ENABLE);
 	SysCtl_setGPIOxPullSel(34, GPIOx_PULL_UP);
-	SysCtl_setGPIOxPullEnable(51 ,ENABLE);
-	SysCtl_setGPIOxPullSel(51, GPIOx_PULL_UP);
+	SysCtl_setGPIOxPullEnable(9 ,ENABLE);
+	SysCtl_setGPIOxPullSel(9, GPIOx_PULL_UP);
 
     GPIO_setPinConfig(myMasterI2C_SDA_PIN);
     GPIO_setPinConfig(myMasterI2C_SCL_PIN);

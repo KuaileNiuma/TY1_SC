@@ -46,7 +46,7 @@
 //*****************************************************************************
 #define myMasterI2C_BASE	  I2C2_BASE       //!< Master I2C base address selection
 #define myMasterI2C_SDA_PIN	  GPIO_34_I2CB_SDA //!< Master I2C SDA pin definition
-#define myMasterI2C_SCL_PIN	  GPIO_51_I2CB_SCL //!< Master I2C SCL pin definition
+#define myMasterI2C_SCL_PIN	  GPIO_9_I2CB_SCL //!< Master I2C SCL pin definition
 #define myMasterI2C_IRQn      I2C2_IRQn       //!< Master I2C interrupt vector
 
 //*****************************************************************************

@@ -185,6 +185,25 @@ Discarded input sections
  .bss           0x00000000        0x0 ./src/i2c2_eeprom_polling.o
  .sbss.FCR_value
                 0x00000000        0x4 ./src/i2c2_eeprom_polling.o
+ .text          0x00000000        0x0 ./scTest_drivers/alb32r003x_screenTest.o
+ .data          0x00000000        0x0 ./scTest_drivers/alb32r003x_screenTest.o
+ .bss           0x00000000        0x0 ./scTest_drivers/alb32r003x_screenTest.o
+ .text.alb32r003x_sc_init
+                0x00000000       0x12 ./scTest_drivers/alb32r003x_screenTest.o
+ .debug_info    0x00000000       0x41 ./scTest_drivers/alb32r003x_screenTest.o
+ .debug_abbrev  0x00000000       0x30 ./scTest_drivers/alb32r003x_screenTest.o
+ .debug_loc     0x00000000       0x44 ./scTest_drivers/alb32r003x_screenTest.o
+ .debug_aranges
+                0x00000000       0x20 ./scTest_drivers/alb32r003x_screenTest.o
+ .debug_ranges  0x00000000       0x10 ./scTest_drivers/alb32r003x_screenTest.o
+ .debug_line    0x00000000       0xa8 ./scTest_drivers/alb32r003x_screenTest.o
+ .debug_str     0x00000000      0x1fb ./scTest_drivers/alb32r003x_screenTest.o
+ .comment       0x00000000       0x1a ./scTest_drivers/alb32r003x_screenTest.o
+ .note.GNU-stack
+                0x00000000        0x0 ./scTest_drivers/alb32r003x_screenTest.o
+ .debug_frame   0x00000000       0x38 ./scTest_drivers/alb32r003x_screenTest.o
+ .riscv.attributes
+                0x00000000       0x8f ./scTest_drivers/alb32r003x_screenTest.o
  .text          0x00000000        0x0 ./Drivers/DriverLib/cpu/startup/intexc.o
  .data          0x00000000        0x0 ./Drivers/DriverLib/cpu/startup/intexc.o
  .bss           0x00000000        0x0 ./Drivers/DriverLib/cpu/startup/intexc.o
@@ -1952,6 +1971,7 @@ Linker script and memory map
 
 LOAD ./src/eeprom.o
 LOAD ./src/i2c2_eeprom_polling.o
+LOAD ./scTest_drivers/alb32r003x_screenTest.o
 LOAD ./Drivers/DriverLib/cpu/startup/intexc.o
 LOAD ./Drivers/DriverLib/cpu/startup/intexc_s.o
 LOAD ./Drivers/DriverLib/cpu/startup/startup.o
@@ -2019,7 +2039,7 @@ END GROUP
                 0x180105c0                        . = ALIGN (0x4)
  *fill*         0x180105c0        0x0 
 
-.text           0x180105c0     0xa308
+.text           0x180105c0     0xa300
  *(.text.unlikely .text.unlikely.*)
  *(.text.startup .text.startup.*)
                 0x180105c0                        . = ALIGN (0x8)
@@ -2097,19 +2117,19 @@ END GROUP
                 0x18010e62       0x34 ./src/i2c2_eeprom_polling.o
                 0x18010e62                I2CX_INTR_IRQHandler
  .text.I2C_GPIO_init
-                0x18010e96       0x5e ./src/i2c2_eeprom_polling.o
+                0x18010e96       0x5a ./src/i2c2_eeprom_polling.o
                 0x18010e96                I2C_GPIO_init
- .text.I2Cinit  0x18010ef4      0x114 ./src/i2c2_eeprom_polling.o
-                0x18010ef4                I2Cinit
+ .text.I2Cinit  0x18010ef0      0x114 ./src/i2c2_eeprom_polling.o
+                0x18010ef0                I2Cinit
  .text.i2c_eeprom_operate
-                0x18011008       0xa8 ./src/i2c2_eeprom_polling.o
-                0x18011008                i2c_eeprom_operate
+                0x18011004       0xa8 ./src/i2c2_eeprom_polling.o
+                0x18011004                i2c_eeprom_operate
  .text.verifyEEPROMRead
-                0x180110b0       0x9a ./src/i2c2_eeprom_polling.o
-                0x180110b0                verifyEEPROMRead
- .text.main     0x1801114a       0x80 ./src/i2c2_eeprom_polling.o
-                0x1801114a                main
- *fill*         0x180111ca       0x36 
+                0x180110ac       0x9a ./src/i2c2_eeprom_polling.o
+                0x180110ac                verifyEEPROMRead
+ .text.main     0x18011146       0x80 ./src/i2c2_eeprom_polling.o
+                0x18011146                main
+ *fill*         0x180111c6       0x3a 
  .text.trap     0x18011200       0x7c ./Drivers/DriverLib/cpu/startup/intexc.o
                 0x18011200                exc_entry
  *fill*         0x1801127c        0x0 
@@ -2270,341 +2290,341 @@ END GROUP
  .text.SCI_enableFIFO
                 0x18012ba4       0x2e ./Boards/alb32r003x_evb/alb32r003x_evb.o
  .text.evb_com_init
-                0x18012bd2       0x60 ./Boards/alb32r003x_evb/alb32r003x_evb.o
+                0x18012bd2       0x5e ./Boards/alb32r003x_evb/alb32r003x_evb.o
                 0x18012bd2                evb_com_init
  .text.BannerPrint
-                0x18012c32       0x50 ./Boards/alb32r003x_evb/alb32r003x_evb.o
- .text.putchar  0x18012c82       0x2a ./Boards/alb32r003x_evb/alb32r003x_evb.o
-                0x18012c82                putchar
- .text.getchar  0x18012cac       0x26 ./Boards/alb32r003x_evb/alb32r003x_evb.o
-                0x18012cac                getchar
+                0x18012c30       0x50 ./Boards/alb32r003x_evb/alb32r003x_evb.o
+ .text.putchar  0x18012c80       0x2a ./Boards/alb32r003x_evb/alb32r003x_evb.o
+                0x18012c80                putchar
+ .text.getchar  0x18012caa       0x26 ./Boards/alb32r003x_evb/alb32r003x_evb.o
+                0x18012caa                getchar
  .text.SystemClock_Set180MHz
-                0x18012cd2       0x60 ./Boards/alb32r003x_evb/alb32r003x_evb.o
-                0x18012cd2                SystemClock_Set180MHz
+                0x18012cd0       0x60 ./Boards/alb32r003x_evb/alb32r003x_evb.o
+                0x18012cd0                SystemClock_Set180MHz
  .text.OptionBytes_init
-                0x18012d32       0xe0 ./Boards/alb32r003x_evb/alb32r003x_evb.o
-                0x18012d32                OptionBytes_init
+                0x18012d30       0xe0 ./Boards/alb32r003x_evb/alb32r003x_evb.o
+                0x18012d30                OptionBytes_init
  .text.alb32r003x_evb_init
-                0x18012e12       0x20 ./Boards/alb32r003x_evb/alb32r003x_evb.o
-                0x18012e12                alb32r003x_evb_init
- .text.__cvt    0x18012e32       0xfa D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-nano-vfprintf_float.o)
-                0x18012e32                __cvt
+                0x18012e10       0x20 ./Boards/alb32r003x_evb/alb32r003x_evb.o
+                0x18012e10                alb32r003x_evb_init
+ .text.__cvt    0x18012e30       0xfa D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-nano-vfprintf_float.o)
+                0x18012e30                __cvt
  .text.__exponent
-                0x18012f2c       0x9c D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-nano-vfprintf_float.o)
-                0x18012f2c                __exponent
+                0x18012f2a       0x9c D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-nano-vfprintf_float.o)
+                0x18012f2a                __exponent
  .text._printf_float
-                0x18012fc8      0x4b6 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-nano-vfprintf_float.o)
-                0x18012fc8                _printf_float
+                0x18012fc6      0x4b6 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-nano-vfprintf_float.o)
+                0x18012fc6                _printf_float
  .text._printf_common
-                0x1801347e      0x108 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-nano-vfprintf_i.o)
-                0x1801347e                _printf_common
+                0x1801347c      0x108 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-nano-vfprintf_i.o)
+                0x1801347c                _printf_common
  .text._printf_i
-                0x18013586      0x256 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-nano-vfprintf_i.o)
-                0x18013586                _printf_i
+                0x18013584      0x256 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-nano-vfprintf_i.o)
+                0x18013584                _printf_i
  .text._scanf_float
-                0x180137dc      0x462 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-nano-vfscanf_float.o)
-                0x180137dc                _scanf_float
- .text.printf   0x18013c3e       0x2a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-printf.o)
-                0x18013c3e                iprintf
-                0x18013c3e                printf
- .text._puts_r  0x18013c68       0xa0 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-puts.o)
-                0x18013c68                _puts_r
- .text.puts     0x18013d08        0x8 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-puts.o)
-                0x18013d08                puts
- .text.sprintf  0x18013d10       0x48 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-sprintf.o)
-                0x18013d10                siprintf
-                0x18013d10                sprintf
+                0x180137da      0x462 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-nano-vfscanf_float.o)
+                0x180137da                _scanf_float
+ .text.printf   0x18013c3c       0x2a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-printf.o)
+                0x18013c3c                iprintf
+                0x18013c3c                printf
+ .text._puts_r  0x18013c66       0xa0 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-puts.o)
+                0x18013c66                _puts_r
+ .text.puts     0x18013d06        0x8 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-puts.o)
+                0x18013d06                puts
+ .text.sprintf  0x18013d0e       0x48 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-sprintf.o)
+                0x18013d0e                siprintf
+                0x18013d0e                sprintf
  .text.__swbuf_r
-                0x18013d58       0x9c D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-wbuf.o)
-                0x18013d58                __swbuf_r
+                0x18013d56       0x9c D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-wbuf.o)
+                0x18013d56                __swbuf_r
  .text.__swsetup_r
-                0x18013df4       0xc4 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-wsetup.o)
-                0x18013df4                __swsetup_r
- .text.memchr   0x18013eb8       0x1a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-memchr.o)
-                0x18013eb8                memchr
+                0x18013df2       0xc4 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-wsetup.o)
+                0x18013df2                __swsetup_r
+ .text.memchr   0x18013eb6       0x1a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-memchr.o)
+                0x18013eb6                memchr
  .text._localeconv_r
-                0x18013ed2        0xa D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-localeconv.o)
-                0x18013ed2                _localeconv_r
+                0x18013ed0        0xa D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-localeconv.o)
+                0x18013ed0                _localeconv_r
  .text.__libc_init_array
-                0x18013edc       0x5e D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-init.o)
-                0x18013edc                __libc_init_array
- .text.isatty   0x18013f3a        0x4 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-sysisatty.o)
-                0x18013f3a                isatty
- .text.memcpy   0x18013f3e       0xe8 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-memcpy.o)
-                0x18013f3e                memcpy
- .text.strlen   0x18014026       0x12 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-strlen.o)
-                0x18014026                strlen
- .text.nanf     0x18014038        0xa D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libm_a-sf_nan.o)
-                0x18014038                nanf
- .text.quorem   0x18014042      0x126 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-dtoa.o)
- .text._dtoa_r  0x18014168      0xbce D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-dtoa.o)
-                0x18014168                _dtoa_r
- .text._free_r  0x18014d36       0x9e D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-freer.o)
-                0x18014d36                _free_r
- .text.malloc   0x18014dd4        0x8 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-malloc.o)
-                0x18014dd4                malloc
+                0x18013eda       0x5e D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-init.o)
+                0x18013eda                __libc_init_array
+ .text.isatty   0x18013f38        0x4 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-sysisatty.o)
+                0x18013f38                isatty
+ .text.memcpy   0x18013f3c       0xe8 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-memcpy.o)
+                0x18013f3c                memcpy
+ .text.strlen   0x18014024       0x12 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-strlen.o)
+                0x18014024                strlen
+ .text.nanf     0x18014036        0xa D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libm_a-sf_nan.o)
+                0x18014036                nanf
+ .text.quorem   0x18014040      0x126 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-dtoa.o)
+ .text._dtoa_r  0x18014166      0xbce D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-dtoa.o)
+                0x18014166                _dtoa_r
+ .text._free_r  0x18014d34       0x9e D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-freer.o)
+                0x18014d34                _free_r
+ .text.malloc   0x18014dd2        0x8 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-malloc.o)
+                0x18014dd2                malloc
  .text.sbrk_aligned
-                0x18014ddc       0x5a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mallocr.o)
+                0x18014dda       0x5a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mallocr.o)
  .text._malloc_r
-                0x18014e36      0x118 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mallocr.o)
-                0x18014e36                _malloc_r
+                0x18014e34      0x116 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mallocr.o)
+                0x18014e34                _malloc_r
  .text.__malloc_lock
-                0x18014f4e        0x2 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mlock.o)
-                0x18014f4e                __malloc_lock
+                0x18014f4a        0x2 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mlock.o)
+                0x18014f4a                __malloc_lock
  .text.__malloc_unlock
-                0x18014f50        0x2 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mlock.o)
-                0x18014f50                __malloc_unlock
- .text._Balloc  0x18014f52       0xa0 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
-                0x18014f52                _Balloc
- .text._Bfree   0x18014ff2       0x60 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
-                0x18014ff2                _Bfree
+                0x18014f4c        0x2 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mlock.o)
+                0x18014f4c                __malloc_unlock
+ .text._Balloc  0x18014f4e       0xa0 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
+                0x18014f4e                _Balloc
+ .text._Bfree   0x18014fee       0x60 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
+                0x18014fee                _Bfree
  .text.__multadd
-                0x18015052       0xb8 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
-                0x18015052                __multadd
- .text.__s2b    0x1801510a       0xc2 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
-                0x1801510a                __s2b
+                0x1801504e       0xb8 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
+                0x1801504e                __multadd
+ .text.__s2b    0x18015106       0xc2 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
+                0x18015106                __s2b
  .text.__hi0bits
-                0x180151cc       0x46 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
-                0x180151cc                __hi0bits
+                0x180151c8       0x46 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
+                0x180151c8                __hi0bits
  .text.__lo0bits
-                0x18015212       0x68 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
-                0x18015212                __lo0bits
- .text.__i2b    0x1801527a       0x38 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
-                0x1801527a                __i2b
+                0x1801520e       0x68 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
+                0x1801520e                __lo0bits
+ .text.__i2b    0x18015276       0x38 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
+                0x18015276                __i2b
  .text.__multiply
-                0x180152b2      0x16e D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
-                0x180152b2                __multiply
+                0x180152ae      0x16e D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
+                0x180152ae                __multiply
  .text.__pow5mult
-                0x18015420       0xde D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
-                0x18015420                __pow5mult
+                0x1801541c       0xde D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
+                0x1801541c                __pow5mult
  .text.__lshift
-                0x180154fe       0xfa D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
-                0x180154fe                __lshift
- .text.__mcmp   0x180155f8       0x36 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
-                0x180155f8                __mcmp
- .text.__mdiff  0x1801562e      0x168 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
-                0x1801562e                __mdiff
- .text.__ulp    0x18015796       0x44 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
-                0x18015796                __ulp
- .text.__b2d    0x180157da       0xb6 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
-                0x180157da                __b2d
- .text.__d2b    0x18015890       0xdc D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
-                0x18015890                __d2b
- .text.__ratio  0x1801596c       0x72 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
-                0x1801596c                __ratio
+                0x180154fa       0xfa D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
+                0x180154fa                __lshift
+ .text.__mcmp   0x180155f4       0x36 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
+                0x180155f4                __mcmp
+ .text.__mdiff  0x1801562a      0x166 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
+                0x1801562a                __mdiff
+ .text.__ulp    0x18015790       0x44 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
+                0x18015790                __ulp
+ .text.__b2d    0x180157d4       0xb6 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
+                0x180157d4                __b2d
+ .text.__d2b    0x1801588a       0xdc D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
+                0x1801588a                __d2b
+ .text.__ratio  0x18015966       0x72 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
+                0x18015966                __ratio
  .text.__copybits
-                0x180159de       0x4a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
-                0x180159de                __copybits
+                0x180159d8       0x4a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
+                0x180159d8                __copybits
  .text.__any_on
-                0x18015a28       0x44 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
-                0x18015a28                __any_on
- .text.sulp     0x18015a6c       0x50 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-strtod.o)
+                0x18015a22       0x44 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mprec.o)
+                0x18015a22                __any_on
+ .text.sulp     0x18015a66       0x50 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-strtod.o)
  .text._strtod_l
-                0x18015abc      0xc3a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-strtod.o)
-                0x18015abc                _strtod_l
+                0x18015ab6      0xc3a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-strtod.o)
+                0x18015ab6                _strtod_l
  .text._strtod_r
-                0x180166f6        0xc D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-strtod.o)
-                0x180166f6                _strtod_r
+                0x180166f0        0xc D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-strtod.o)
+                0x180166f0                _strtod_r
  .text._strtol_l.isra.0
-                0x18016702      0x132 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-strtol.o)
+                0x180166fc      0x132 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-strtol.o)
  .text._strtol_r
-                0x18016834        0x4 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-strtol.o)
-                0x18016834                _strtol_r
+                0x1801682e        0x4 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-strtol.o)
+                0x1801682e                _strtol_r
  .text.__ssputs_r
-                0x18016838       0xf0 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-nano-svfprintf.o)
-                0x18016838                __ssputs_r
+                0x18016832       0xf0 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-nano-svfprintf.o)
+                0x18016832                __ssputs_r
  .text._svfprintf_r
-                0x18016928      0x27e D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-nano-svfprintf.o)
-                0x18016928                _svfiprintf_r
-                0x18016928                _svfprintf_r
+                0x18016922      0x27e D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-nano-svfprintf.o)
+                0x18016922                _svfiprintf_r
+                0x18016922                _svfprintf_r
  .text.__sfputc_r
-                0x18016ba6       0x2a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-nano-vfprintf.o)
+                0x18016ba0       0x2a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-nano-vfprintf.o)
  .text.__sfputs_r
-                0x18016bd0       0x44 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-nano-vfprintf.o)
-                0x18016bd0                __sfputs_r
+                0x18016bca       0x44 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-nano-vfprintf.o)
+                0x18016bca                __sfputs_r
  .text._vfprintf_r
-                0x18016c14      0x270 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-nano-vfprintf.o)
-                0x18016c14                _vfprintf_r
-                0x18016c14                _vfiprintf_r
+                0x18016c0e      0x270 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-nano-vfprintf.o)
+                0x18016c0e                _vfprintf_r
+                0x18016c0e                _vfiprintf_r
  .text.__sflush_r
-                0x18016e84      0x12e D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-fflush.o)
-                0x18016e84                __sflush_r
+                0x18016e7e      0x12e D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-fflush.o)
+                0x18016e7e                __sflush_r
  .text._fflush_r
-                0x18016fb2       0x38 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-fflush.o)
-                0x18016fb2                _fflush_r
- .text.std      0x18016fea       0x68 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-findfp.o)
+                0x18016fac       0x38 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-fflush.o)
+                0x18016fac                _fflush_r
+ .text.std      0x18016fe4       0x68 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-findfp.o)
  .text.stdio_exit_handler
-                0x18017052       0x1a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-findfp.o)
+                0x1801704c       0x1a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-findfp.o)
  .text.cleanup_stdio
-                0x1801706c       0x50 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-findfp.o)
+                0x18017066       0x50 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-findfp.o)
  .text.global_stdio_init.part.0
-                0x180170bc       0x44 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-findfp.o)
- .text.__sinit  0x18017100       0x1a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-findfp.o)
-                0x18017100                __sinit
+                0x180170b6       0x44 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-findfp.o)
+ .text.__sinit  0x180170fa       0x1a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-findfp.o)
+                0x180170fa                __sinit
  .text._fwalk_sglue
-                0x1801711a       0x68 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-fwalk.o)
-                0x1801711a                _fwalk_sglue
+                0x18017114       0x68 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-fwalk.o)
+                0x18017114                _fwalk_sglue
  .text.__swhatbuf_r
-                0x18017182       0x5a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-makebuf.o)
-                0x18017182                __swhatbuf_r
+                0x1801717c       0x5a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-makebuf.o)
+                0x1801717c                __swhatbuf_r
  .text.__smakebuf_r
-                0x180171dc       0x86 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-makebuf.o)
-                0x180171dc                __smakebuf_r
- .text.__sread  0x18017262       0x2e D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-stdio.o)
-                0x18017262                __sread
+                0x180171d6       0x86 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-makebuf.o)
+                0x180171d6                __smakebuf_r
+ .text.__sread  0x1801725c       0x2e D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-stdio.o)
+                0x1801725c                __sread
  .text.__swrite
-                0x18017290       0x4c D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-stdio.o)
-                0x18017290                __swrite
- .text.__sseek  0x180172dc       0x34 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-stdio.o)
-                0x180172dc                __sseek
+                0x1801728a       0x4c D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-stdio.o)
+                0x1801728a                __swrite
+ .text.__sseek  0x180172d6       0x34 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-stdio.o)
+                0x180172d6                __sseek
  .text.__sclose
-                0x18017310        0x6 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-stdio.o)
-                0x18017310                __sclose
- .text.strncmp  0x18017316       0x30 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-strncmp.o)
-                0x18017316                strncmp
+                0x1801730a        0x6 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-stdio.o)
+                0x1801730a                __sclose
+ .text.strncmp  0x18017310       0x30 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-strncmp.o)
+                0x18017310                strncmp
  .text._close_r
-                0x18017346       0x28 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-closer.o)
-                0x18017346                _close_r
+                0x18017340       0x28 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-closer.o)
+                0x18017340                _close_r
  .text._fstat_r
-                0x1801736e       0x2a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-fstatr.o)
-                0x1801736e                _fstat_r
+                0x18017368       0x2a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-fstatr.o)
+                0x18017368                _fstat_r
  .text._isatty_r
-                0x18017398       0x28 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-isattyr.o)
-                0x18017398                _isatty_r
+                0x18017392       0x28 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-isattyr.o)
+                0x18017392                _isatty_r
  .text._lseek_r
-                0x180173c0       0x2c D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-lseekr.o)
-                0x180173c0                _lseek_r
- .text._read_r  0x180173ec       0x2c D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-readr.o)
-                0x180173ec                _read_r
- .text._sbrk_r  0x18017418       0x28 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-sbrkr.o)
-                0x18017418                _sbrk_r
+                0x180173ba       0x2c D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-lseekr.o)
+                0x180173ba                _lseek_r
+ .text._read_r  0x180173e6       0x2c D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-readr.o)
+                0x180173e6                _read_r
+ .text._sbrk_r  0x18017412       0x28 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-sbrkr.o)
+                0x18017412                _sbrk_r
  .text._write_r
-                0x18017440       0x2c D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-writer.o)
-                0x18017440                _write_r
- .text.__errno  0x1801746c        0x6 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-errno.o)
-                0x1801746c                __errno
- .text.memmove  0x18017472       0x4a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-memmove-stub.o)
-                0x18017472                memmove
- .text          0x180174bc       0xa8 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-memset.o)
-                0x180174bc                memset
- .text.nan      0x18017564        0xe D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libm_a-s_nan.o)
-                0x18017564                nan
+                0x1801743a       0x2c D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-writer.o)
+                0x1801743a                _write_r
+ .text.__errno  0x18017466        0x6 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-errno.o)
+                0x18017466                __errno
+ .text.memmove  0x1801746c       0x4a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-memmove-stub.o)
+                0x1801746c                memmove
+ .text          0x180174b6       0xa8 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-memset.o)
+                0x180174b6                memset
+ .text.nan      0x1801755e        0xe D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libm_a-s_nan.o)
+                0x1801755e                nan
  .text.__assert_func
-                0x18017572       0x3a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-assert.o)
-                0x18017572                __assert_func
+                0x1801756c       0x3a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-assert.o)
+                0x1801756c                __assert_func
  .text._calloc_r
-                0x180175ac       0x36 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-callocr.o)
-                0x180175ac                _calloc_r
- .text.rshift   0x180175e2       0xb2 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-gdtoa-gethex.o)
+                0x180175a6       0x36 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-callocr.o)
+                0x180175a6                _calloc_r
+ .text.rshift   0x180175dc       0xb2 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-gdtoa-gethex.o)
  .text.__hexdig_fun
-                0x18017694       0x42 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-gdtoa-gethex.o)
-                0x18017694                __hexdig_fun
+                0x1801768e       0x42 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-gdtoa-gethex.o)
+                0x1801768e                __hexdig_fun
  .text.__gethex
-                0x180176d6      0x4b4 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-gdtoa-gethex.o)
-                0x180176d6                __gethex
- .text.L_shift  0x18017b8a       0x2a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-gdtoa-hexnan.o)
- .text.__match  0x18017bb4       0x2c D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-gdtoa-hexnan.o)
-                0x18017bb4                __match
+                0x180176d0      0x4b4 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-gdtoa-gethex.o)
+                0x180176d0                __gethex
+ .text.L_shift  0x18017b84       0x2a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-gdtoa-hexnan.o)
+ .text.__match  0x18017bae       0x2c D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-gdtoa-hexnan.o)
+                0x18017bae                __match
  .text.__hexnan
-                0x18017be0      0x174 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-gdtoa-hexnan.o)
-                0x18017be0                __hexnan
+                0x18017bda      0x174 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-gdtoa-hexnan.o)
+                0x18017bda                __hexnan
  .text.__ascii_mbtowc
-                0x18017d54       0x3a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mbtowc_r.o)
-                0x18017d54                __ascii_mbtowc
+                0x18017d4e       0x3a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-mbtowc_r.o)
+                0x18017d4e                __ascii_mbtowc
  .text._realloc_r
-                0x18017d8e       0x78 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-reallocr.o)
-                0x18017d8e                _realloc_r
+                0x18017d88       0x78 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-reallocr.o)
+                0x18017d88                _realloc_r
  .text.__ascii_wctomb
-                0x18017e06       0x20 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-wctomb_r.o)
-                0x18017e06                __ascii_wctomb
- .text.fprintf  0x18017e26       0x26 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-fprintf.o)
-                0x18017e26                fiprintf
-                0x18017e26                fprintf
- .text.abort    0x18017e4c        0xe D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-abort.o)
-                0x18017e4c                abort
+                0x18017e00       0x20 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-wctomb_r.o)
+                0x18017e00                __ascii_wctomb
+ .text.fprintf  0x18017e20       0x26 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-fprintf.o)
+                0x18017e20                fiprintf
+                0x18017e20                fprintf
+ .text.abort    0x18017e46        0xe D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-abort.o)
+                0x18017e46                abort
  .text._malloc_usable_size_r
-                0x18017e5a       0x14 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-msizer.o)
-                0x18017e5a                _malloc_usable_size_r
+                0x18017e54       0x14 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-msizer.o)
+                0x18017e54                _malloc_usable_size_r
  .text._raise_r
-                0x18017e6e       0x5c D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-signal.o)
-                0x18017e6e                _raise_r
- .text.raise    0x18017eca        0xa D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-signal.o)
-                0x18017eca                raise
- .text._kill_r  0x18017ed4       0x2a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-signalr.o)
-                0x18017ed4                _kill_r
+                0x18017e68       0x5c D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-signal.o)
+                0x18017e68                _raise_r
+ .text.raise    0x18017ec4        0xa D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-signal.o)
+                0x18017ec4                raise
+ .text._kill_r  0x18017ece       0x2a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-signalr.o)
+                0x18017ece                _kill_r
  .text._getpid_r
-                0x18017efe        0x4 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-signalr.o)
-                0x18017efe                _getpid_r
- .text          0x18017f02      0x808 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(adddf3.o)
-                0x18017f02                __adddf3
- .text          0x1801870a      0x62e D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(divdf3.o)
-                0x1801870a                __divdf3
- .text          0x18018d38       0xa8 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(eqdf2.o)
-                0x18018d38                __nedf2
-                0x18018d38                __eqdf2
- .text          0x18018de0       0xae D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(gedf2.o)
-                0x18018de0                __gedf2
-                0x18018de0                __gtdf2
- .text          0x18018e8e       0xae D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(ledf2.o)
-                0x18018e8e                __ledf2
-                0x18018e8e                __ltdf2
- .text          0x18018f3c      0x564 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(muldf3.o)
-                0x18018f3c                __muldf3
- .text          0x180194a0      0x81c D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(subdf3.o)
-                0x180194a0                __subdf3
- .text          0x18019cbc       0x6a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(unorddf2.o)
-                0x18019cbc                __unorddf2
- .text          0x18019d26       0xb8 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(fixdfsi.o)
-                0x18019d26                __fixdfsi
- .text          0x18019dde       0x94 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(fixunsdfsi.o)
-                0x18019dde                __fixunsdfsi
- .text          0x18019e72       0x50 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(floatsidf.o)
-                0x18019e72                __floatsidf
- .text          0x18019ec2       0x42 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(floatunsidf.o)
-                0x18019ec2                __floatunsidf
- .text          0x18019f04       0xfc D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(fixdfdi.o)
-                0x18019f04                __fixdfdi
- .text          0x1801a000      0x18c D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(floatdidf.o)
-                0x1801a000                __floatdidf
- .text          0x1801a18c      0x170 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(extenddftf2.o)
-                0x1801a18c                __extenddftf2
- .text          0x1801a2fc      0x21a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(truncdfsf2.o)
-                0x1801a2fc                __truncdfsf2
- .text          0x1801a516      0x35c D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(trunctfdf2.o)
-                0x1801a516                __trunctfdf2
- .text          0x1801a872       0x28 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(_lshrdi3.o)
-                0x1801a872                __lshrdi3
- .text          0x1801a89a       0x28 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(_ashldi3.o)
-                0x1801a89a                __ashldi3
+                0x18017ef8        0x4 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/../../../../riscv64-unknown-elf/lib/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libc_nano.a(libc_a-signalr.o)
+                0x18017ef8                _getpid_r
+ .text          0x18017efc      0x808 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(adddf3.o)
+                0x18017efc                __adddf3
+ .text          0x18018704      0x62e D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(divdf3.o)
+                0x18018704                __divdf3
+ .text          0x18018d32       0xa8 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(eqdf2.o)
+                0x18018d32                __nedf2
+                0x18018d32                __eqdf2
+ .text          0x18018dda       0xae D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(gedf2.o)
+                0x18018dda                __gedf2
+                0x18018dda                __gtdf2
+ .text          0x18018e88       0xae D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(ledf2.o)
+                0x18018e88                __ledf2
+                0x18018e88                __ltdf2
+ .text          0x18018f36      0x564 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(muldf3.o)
+                0x18018f36                __muldf3
+ .text          0x1801949a      0x81c D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(subdf3.o)
+                0x1801949a                __subdf3
+ .text          0x18019cb6       0x6a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(unorddf2.o)
+                0x18019cb6                __unorddf2
+ .text          0x18019d20       0xb8 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(fixdfsi.o)
+                0x18019d20                __fixdfsi
+ .text          0x18019dd8       0x94 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(fixunsdfsi.o)
+                0x18019dd8                __fixunsdfsi
+ .text          0x18019e6c       0x50 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(floatsidf.o)
+                0x18019e6c                __floatsidf
+ .text          0x18019ebc       0x42 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(floatunsidf.o)
+                0x18019ebc                __floatunsidf
+ .text          0x18019efe       0xfc D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(fixdfdi.o)
+                0x18019efe                __fixdfdi
+ .text          0x18019ffa      0x18c D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(floatdidf.o)
+                0x18019ffa                __floatdidf
+ .text          0x1801a186      0x170 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(extenddftf2.o)
+                0x1801a186                __extenddftf2
+ .text          0x1801a2f6      0x21a D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(truncdfsf2.o)
+                0x1801a2f6                __truncdfsf2
+ .text          0x1801a510      0x35c D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(trunctfdf2.o)
+                0x1801a510                __trunctfdf2
+ .text          0x1801a86c       0x28 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(_lshrdi3.o)
+                0x1801a86c                __lshrdi3
+ .text          0x1801a894       0x28 D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/toolchain/gcc/bin/../lib/gcc/riscv64-unknown-elf/14.2.1/rv32imafc_zaamo_zalrsc_zba_zbb_zbs_xxldsp/ilp32f\libgcc.a(_ashldi3.o)
+                0x1801a894                __ashldi3
  *(.ztf_ctx.0)
  *(EXCLUDE_FILE(*ztf.o) .ztf_ctx.*)
  *(.ztf_ctx.9)
  *(.gnu.linkonce.t.*)
-                0x1801a8c8                        . = ALIGN (0x8)
- *fill*         0x1801a8c2        0x6 
+                0x1801a8c0                        . = ALIGN (0x8)
+ *fill*         0x1801a8bc        0x4 
  *(SORT_NONE(.fini))
-                0x1801a8c8                        . = ALIGN (0x8)
-                0x1801a8c8                        PROVIDE (__preinit_array_start = .)
+                0x1801a8c0                        . = ALIGN (0x8)
+                0x1801a8c0                        PROVIDE (__preinit_array_start = .)
  *(.preinit_array)
-                0x1801a8c8                        PROVIDE (__preinit_array_end = .)
-                0x1801a8c8                        . = ALIGN (0x8)
-                0x1801a8c8                        PROVIDE (__init_array_start = .)
+                0x1801a8c0                        PROVIDE (__preinit_array_end = .)
+                0x1801a8c0                        . = ALIGN (0x8)
+                0x1801a8c0                        PROVIDE (__init_array_start = .)
  *(SORT_BY_INIT_PRIORITY(.init_array.*) SORT_BY_INIT_PRIORITY(.ctors.*))
  *(.init_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .ctors)
-                0x1801a8c8                        PROVIDE (__init_array_end = .)
-                0x1801a8c8                        . = ALIGN (0x8)
+                0x1801a8c0                        PROVIDE (__init_array_end = .)
+                0x1801a8c0                        . = ALIGN (0x8)
                 [!provide]                        PROVIDE (__fini_array_start = .)
                 [!provide]                        PROVIDE (__libc_fini = _fini)
  *(SORT_BY_INIT_PRIORITY(.fini_array.*) SORT_BY_INIT_PRIORITY(.dtors.*))
  *(.fini_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .dtors)
                 [!provide]                        PROVIDE (__fini_array_end = .)
-                0x1801a8c8                        . = ALIGN (0x8)
+                0x1801a8c0                        . = ALIGN (0x8)
  *crtbegin.o(.ctors)
  *crtbegin?.o(.ctors)
  *(EXCLUDE_FILE(*crtend?.o *crtend.o) .ctors)
  *(SORT_BY_NAME(.ctors.*))
  *(.ctors)
-                0x1801a8c8                        . = ALIGN (0x8)
+                0x1801a8c0                        . = ALIGN (0x8)
  *crtbegin.o(.dtors)
  *crtbegin?.o(.dtors)
  *(EXCLUDE_FILE(*crtend?.o *crtend.o) .dtors)
@@ -2613,34 +2633,34 @@ END GROUP
  *(.ztf_ctx.*)
                 0x180105c0                        PROVIDE (_ilm_lma = LOADADDR (.text))
                 0x180105c0                        PROVIDE (_ilm = ADDR (.text))
-                0x1801a8c8                        PROVIDE (_eilm = .)
+                0x1801a8c0                        PROVIDE (_eilm = .)
                 [!provide]                        PROVIDE (_text_lma = LOADADDR (.text))
                 [!provide]                        PROVIDE (_text = ADDR (.text))
                 [!provide]                        PROVIDE (_etext = .)
                 [!provide]                        PROVIDE (__etext = .)
                 [!provide]                        PROVIDE (etext = .)
 
-.rela.dyn       0x1801a8c8        0x0
+.rela.dyn       0x1801a8c0        0x0
  .rela.text.vtable
-                0x1801a8c8        0x0 ./src/eeprom.o
+                0x1801a8c0        0x0 ./src/eeprom.o
  .rela.text.init
-                0x1801a8c8        0x0 ./src/eeprom.o
+                0x1801a8c0        0x0 ./src/eeprom.o
  .rela.text.ECLIC_Interrupt_Init
-                0x1801a8c8        0x0 ./src/eeprom.o
+                0x1801a8c0        0x0 ./src/eeprom.o
  .rela.text.Interrupt_Init
-                0x1801a8c8        0x0 ./src/eeprom.o
+                0x1801a8c0        0x0 ./src/eeprom.o
  .rela.text._sbrk
-                0x1801a8c8        0x0 ./src/eeprom.o
+                0x1801a8c0        0x0 ./src/eeprom.o
  .rela.sdata.curbrk.1
-                0x1801a8c8        0x0 ./src/eeprom.o
+                0x1801a8c0        0x0 ./src/eeprom.o
  .rela.text.__libc_init_array
-                0x1801a8c8        0x0 ./src/eeprom.o
+                0x1801a8c0        0x0 ./src/eeprom.o
  .rela.text._svfprintf_r
-                0x1801a8c8        0x0 ./src/eeprom.o
+                0x1801a8c0        0x0 ./src/eeprom.o
  .rela.text._vfprintf_r
-                0x1801a8c8        0x0 ./src/eeprom.o
+                0x1801a8c0        0x0 ./src/eeprom.o
 
-.data           0x18040000      0xf10 load address 0x1801a8c8
+.data           0x18040000      0xf10 load address 0x1801a8c0
  *(.data.ctest*)
  *(.data .data.*)
  .data._impure_data
@@ -2773,25 +2793,25 @@ END GROUP
                 0x18040f10                        __vsymtab_end = .
                 0x18040f10                        . = ALIGN (0x8)
 
-.tdata          0x18040f10        0x0 load address 0x1801b7d8
+.tdata          0x18040f10        0x0 load address 0x1801b7d0
                 0x18040f10                        PROVIDE (__tls_base = .)
  *(.tdata .tdata.* .gnu.linkonce.td.*)
-                0x1801a8c8                        PROVIDE (_data_lma = LOADADDR (.data))
+                0x1801a8c0                        PROVIDE (_data_lma = LOADADDR (.data))
                 0x18040000                        PROVIDE (_data = ADDR (.data))
                 0x18040f10                        PROVIDE (_edata = .)
                 [!provide]                        PROVIDE (edata = .)
                 [!provide]                        PROVIDE (_fbss = .)
                 0x18040f10                        PROVIDE (__bss_start = .)
 
-.tbss           0x18040f10        0x0 load address 0x1801b7d8
+.tbss           0x18040f10        0x0 load address 0x1801b7d0
  *(.tbss .tbss.* .gnu.linkonce.tb.*)
  *(.tcommon)
                 [!provide]                        PROVIDE (__tls_end = .)
 
-.tbss_space     0x18040f10        0x0 load address 0x1801b7d8
+.tbss_space     0x18040f10        0x0 load address 0x1801b7d0
                 0x18040f10                        . = (. + SIZEOF (.tbss))
 
-.bss            0x18040f10      0x3c0 load address 0x1801b7d8
+.bss            0x18040f10      0x3c0 load address 0x1801b7d0
  *(.sbss*)
  .sbss.eeprom_addr_len
                 0x18040f10        0x4 ./src/eeprom.o
@@ -2827,7 +2847,7 @@ END GROUP
                 0x180412d0                        PROVIDE (_end = .)
                 [!provide]                        PROVIDE (end = .)
 
-.heap           0x180412d0      0x800 load address 0x1801b7e0
+.heap           0x180412d0      0x800 load address 0x1801b7d0
                 0x180412d0                        . = ALIGN (0x10)
                 0x180412d0                        PROVIDE (__heap_start = .)
                 0x18041ad0                        . = (. + __HEAP_SIZE)
@@ -2835,7 +2855,7 @@ END GROUP
                 0x18041ad0                        . = ALIGN (0x10)
                 [!provide]                        PROVIDE (__heap_limit = .)
 
-.stack          0x18041ad0     0xe530 load address 0x1801b7d8
+.stack          0x18041ad0     0xe530 load address 0x1801b7d0
                 0x18041ad0                        . = ALIGN (0x10)
                 0x1804f800                        . = ((ORIGIN (RAM) + LENGTH (RAM)) - __TOT_STACK_SIZE)
  *fill*         0x18041ad0     0xdd30 

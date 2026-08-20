@@ -41,5 +41,6 @@ Drivers/Common \
 Drivers/DriverLib \
 Drivers/DriverLib/cpu \
 Drivers/DriverLib/cpu/startup \
+scTest_drivers \
 src \
 
