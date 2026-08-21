@@ -11,6 +11,7 @@
 
 #define TEST_GPIO_PIN     (0)           //!< Test GPIO pin number
 #define TIMER_PERIOD      (35000000)    //!< Timer period value
+#define MY_TIMER_CLK_EN   SYSCTL_PERIPH_CLK_TIMER1   //!< Timer peripheral clock enable
 #define MY_TIMER_BASE     TIMER1_BASE   //!< Timer base
 #define MY_TIMER_CHANNEL  0             //!< Timer channel number
 #define MY_TIMER_IRQ      TIMER1_C1_IRQn

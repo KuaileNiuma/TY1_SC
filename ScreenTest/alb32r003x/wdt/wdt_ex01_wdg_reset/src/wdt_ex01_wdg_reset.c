@@ -38,6 +38,7 @@
 #include <stdio.h>
 #include "alb32r003x_evb.h"
 #include "alb32r003x_screenTest.h"
+#include "cpufeature.h"
 
 //*****************************************************************************
 //
@@ -107,6 +108,10 @@ void wdt_system_reset_test(void)
 //*****************************************************************************
 int main(void)
 {
+    uint64_t start_cycle;
+    uint32_t cur0;
+    uint32_t cur1;
+
 	alb32r003x_evb_init();
     //
     // Print example information
@@ -124,7 +129,22 @@ int main(void)
     wdt_system_reset_test();
 
     //
-    // Infinite loop (will not be reached due to WDT reset)
+    // Verify the watchdog counter is running: read it twice with a short delay.
+    // If it decreases, the watchdog is working and a system reset is imminent.
     //
-    return SC_PASS;
+    cur0 = WDT_get_curval(WDT1_BASE);
+    start_cycle = __get_rv_cycle();
+    while ((__get_rv_cycle() - start_cycle) < 20000000ULL)
+    {
+    }
+    cur1 = WDT_get_curval(WDT1_BASE);
+
+    if (cur1 < cur0)
+    {
+        printf("WDT system reset test OK: counter running, system will be reset soon.\r\n");
+        return SC_PASS;
+    }
+
+    printf("WDT system reset test FAIL: watchdog counter is not running.\r\n");
+    return SC_FAIL;
 }

@@ -1,2 +1,2 @@
 Drivers/DriverLib/spl.o: \
- D:/Programs/ALBStudio_20260331_V1.0/ALBStudio/Packages/ALB32RT_SDK/Drivers/DriverLib/spl.c
+ D:/ZVS_LAB/ALBStudio_IDE_202602-win64_0305_0313sdk/ALBStudio/Packages/ALB32RT_SDK/Drivers/DriverLib/spl.c

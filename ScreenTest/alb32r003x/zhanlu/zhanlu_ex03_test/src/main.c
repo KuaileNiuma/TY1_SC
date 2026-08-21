@@ -53,17 +53,18 @@ extern int viterbi_test(void);     //!< External function for Viterbi test
 //*****************************************************************************
 int main(void)
 {
+    int ret;
     alb32r003x_evb_init();
 
     //
     // Run Viterbi test
     //
-    viterbi_test();
+    ret = viterbi_test();
 
     //
     // Infinite loop to prevent the program from exiting
     //
     printf("test end\r\n");
-    return SC_PASS;
+    return ret;
 }
 

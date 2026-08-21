@@ -81,11 +81,6 @@ __INTERRUPT void mytimerCHISR(void)
     TIMER_clearInterruptPending(MY_TIMER_BASE, MY_TIMER_CHANNEL);
     
     //
-    // Toggle the test GPIO pin
-    //
-    GPIO_togglePin(TEST_GPIO_PIN);
-    
-    //
     // Increment the interrupt counter
     //
     Timer_ex1_IntCnt++;
@@ -107,6 +102,11 @@ __INTERRUPT void mytimerCHISR(void)
 //*****************************************************************************
 void timer_init( void )
 {
+    //
+    // Enable the timer peripheral clock
+    //
+    SysCtl_enablePeripheral(MY_TIMER_CLK_EN);
+
     //
     // Configure timer channel and instance
     //
@@ -165,12 +165,6 @@ void timer_init( void )
 void Board_init()
 {
     //
-    // Configure GPIO pin for output
-    //
-    GPIO_setPinConfig(GPIO_0_GPIO0);
-    GPIO_setDirectionMode(TEST_GPIO_PIN, GPIO_DIR_MODE_OUT);
-    
-    //
     // Initialize timer and interrupts
     //
     timer_init();
@@ -184,6 +178,12 @@ void Board_init()
 //*****************************************************************************
 int main(void)
 {
+    uint32_t sys_clk;
+    uint32_t apbl_clk;
+    uint32_t clk_div;
+    uint64_t start_cycle;
+    uint64_t timeout_cycle;
+
 	alb32r003x_evb_init();
     //
     // Print example information
@@ -201,12 +201,35 @@ int main(void)
     Board_init();
 
     //
+    // Compute a frequency-scaled timeout in CPU cycles.
+    // 16 interrupts need 16 * TIMER_PERIOD timer clocks; the timer clock is
+    // at most the APBL clock, so scale by SystemClock/APBL and keep 10x margin.
+    // The cycle count is independent of CPU frequency and memory location.
+    //
+    sys_clk = SystemClock_Get();
+    apbl_clk = SystemClock_Get_APBL();
+    clk_div = (apbl_clk == 0) ? 1U : (sys_clk / apbl_clk);
+    start_cycle = __get_rv_cycle();
+    timeout_cycle = 16ULL * TIMER_PERIOD * clk_div * 10U;
+
+    //
     // Wait for test completion
     //
-    while(Timer_ex1_TestDone == 0);
-    
-    //
-    // Infinite loop
-    //
-    return SC_PASS;
+    while(Timer_ex1_TestDone == 0)
+    {
+        if((__get_rv_cycle() - start_cycle) > timeout_cycle)
+        {
+            printf("TIMER EX01 IRQ FAIL: timeout.\r\n");
+            return SC_FAIL;
+        }
+    }
+
+    if(Timer_ex1_IntCnt >= 16)
+    {
+        printf("TIMER EX01 IRQ PASS.\r\n");
+        return SC_PASS;
+    }
+
+    printf("TIMER EX01 IRQ FAIL: count=%d\r\n", (int)Timer_ex1_IntCnt);
+    return SC_FAIL;
 }

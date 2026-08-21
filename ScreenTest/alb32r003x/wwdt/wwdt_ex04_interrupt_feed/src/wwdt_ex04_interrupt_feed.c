@@ -36,6 +36,11 @@
 
 #include "alb32r003x_evb.h"
 #include "alb32r003x_screenTest.h"
+#include "cpufeature.h"
+#include "system_cpu.h"
+
+#define WWDT_FEED_TARGET      3U    //!< Target number of WWDT early wakeup interrupts to prove the interrupt feed path
+#define WWDT_FEED_TIMEOUT_S   5U    //!< Timeout in seconds for the feed test
 
 typedef struct {
     uint32_t WWDG_Prescaler;   //!< WWDT prescaler value
@@ -135,6 +140,10 @@ void wwdt_system_reset_test(void)
 //*****************************************************************************
 int main(void)
 {
+    uint64_t start_cycle;
+    uint64_t timeout_cycle;
+    uint32_t sys_clk;
+
 	alb32r003x_evb_init();
 
 	SysCtl_resetPeripheral(SYSCTL_PERIPH_RES_WWDT);
@@ -163,8 +172,29 @@ int main(void)
     wwdt_system_reset_test();
 
     //
-    // Infinite loop
-    // WWDT is fed in the interrupt handler
+    // Compute a CPU-cycle timeout in seconds
     //
+    sys_clk = SystemClock_Get();
+    if (sys_clk == 0)
+    {
+        sys_clk = 180000000U;
+    }
+    timeout_cycle = (uint64_t)WWDT_FEED_TIMEOUT_S * sys_clk;
+
+    //
+    // Wait until the WWDT early wakeup interrupt has refreshed the counter
+    // several times, proving both the interrupt and the feed path work.
+    //
+    start_cycle = __get_rv_cycle();
+    while (wwdgIrqCount < WWDT_FEED_TARGET)
+    {
+        if ((__get_rv_cycle() - start_cycle) > timeout_cycle)
+        {
+            printf("WWDT interrupt feed test FAIL: count=%u\r\n", (unsigned int)wwdgIrqCount);
+            return SC_FAIL;
+        }
+    }
+
+    printf("WWDT interrupt feed test OK: count=%u\r\n", (unsigned int)wwdgIrqCount);
     return SC_PASS;
 }

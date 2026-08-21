@@ -65,6 +65,7 @@ int main(void)
 	SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_SDFM2);
 	SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_DMA1);
 	SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_DMA2);
+
     Board_init();
 
     Interrupt_register(DMAC1_C1_IRQn, DMA_CH0ISR);

@@ -39,12 +39,27 @@
 #include "wdt.h"
 #include "clb_board.h"
 #include "clb_config.h"
+#include "alb32r003x_screenTest.h"
+#include "cpufeature.h"
+#include "system_cpu.h"
 
+#define WDT_NMI_TIMEOUT_S   5U     //!< Timeout in seconds waiting for the NMI to trigger
 uint32_t nmi_flag;
 
 
 void NMI()
 {
+    //
+    // Disable the CLB NMI source so it cannot keep interrupting the CPU
+    // while main reports the test result.
+    //
+    CLB_disableNMI(myCLB0_BASE);
+
+    //
+    // Feed the watchdog to prevent an early reset.
+    //
+    WDT_feed(WDT1_BASE);
+
 	nmi_flag = 0x10;
 }
 
@@ -55,6 +70,9 @@ void NMI()
 //*****************************************************************************
 int main(void)
 {
+    uint64_t start_cycle;
+    uint64_t timeout_cycle;
+    uint32_t sys_clk;
 
 	alb32r003x_evb_init();
     //
@@ -94,7 +112,34 @@ int main(void)
     CLB_enableCLB(myCLB0_BASE);
 
     //
-    // Infinite loop - WDT will reset the system if not fed periodically
+    // Compute a CPU-cycle timeout in seconds
     //
-    for(;;);
+    sys_clk = SystemClock_Get();
+    if (sys_clk == 0)
+    {
+        sys_clk = 180000000U;
+    }
+    timeout_cycle = (uint64_t)WDT_NMI_TIMEOUT_S * sys_clk;
+
+    //
+    // Wait for the NMI handler to be triggered by the CLB logic
+    //
+    start_cycle = __get_rv_cycle();
+    while (nmi_flag == 0)
+    {
+        if ((__get_rv_cycle() - start_cycle) > timeout_cycle)
+        {
+            printf("WDT NMI test FAIL: NMI not triggered.\r\n");
+            return SC_FAIL;
+        }
+    }
+
+    //
+    // Disable the system NMI before printing so the result cannot be
+    // corrupted by a further NMI.
+    //
+    SysCtl_disableNMI();
+
+    printf("WDT NMI test OK: NMI triggered, flag=0x%x.\r\n", nmi_flag);
+    return SC_PASS;
 }

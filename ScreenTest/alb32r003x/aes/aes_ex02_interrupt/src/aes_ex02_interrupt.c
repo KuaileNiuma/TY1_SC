@@ -41,6 +41,7 @@
 uint32_t aes_key[8];
 uint32_t aes_din[4];
 uint32_t aes_dout[4];
+uint32_t aes_expect[4] = {0x70B4C55A, 0xD8CDB780, 0x6A7B0430, 0x69C4E0D8};
 
 void aes_key_init(void)
 {
@@ -111,6 +112,15 @@ int main(void)
         printf("0x%X\r\n",aes_dout[i]);
     }
 
+    for(i = 0; i < 4; i++)
+    {
+        if(aes_dout[i] != aes_expect[i])
+        {
+            printf("AES EX02 INTERRUPT FAIL, index %d: expect 0x%X, actual 0x%X\r\n", i, aes_expect[i], aes_dout[i]);
+            return SC_FAIL;
+        }
+    }
+    printf("AES EX02 INTERRUPT PASS.\r\n");
 
     return SC_PASS;
 }

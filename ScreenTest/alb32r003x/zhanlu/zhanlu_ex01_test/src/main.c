@@ -34,6 +34,7 @@
  ************************************************************************************
  */
 #include "alb32r003x_evb.h"
+#include "alb32r003x_screenTest.h"
 #include <stdio.h>
 #include "device.h"
 #include <math.h>
@@ -132,15 +133,12 @@ uint8_t g_test = 0;                 //!< General test flag
 //*****************************************************************************
 int main(void)
 {
-    uint32_t returnCode;
+    int returnCode;
     alb32r003x_evb_init();
 
 
-    zhanlu_test();
+    returnCode = zhanlu_test();
 
-    while (1)
-        ;
-
-    return 0;
+    return returnCode;
 }
 

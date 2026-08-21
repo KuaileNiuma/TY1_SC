@@ -52,6 +52,7 @@
 #define ADC_SAMPLE_TIME     40U                          //!< ADC sample time in SYSCLK cycles
 #define VREFHI_VAL          1.65                         //!< Reference voltage value
 #define SIN_SAMPLE          128                          //!< Number of sine wave samples
+#define DAC_ADC_TOL         80U                          //!< Max allowed error between DAC set value and ADC sample
 //*****************************************************************************
 //
 // Local Variables
@@ -108,10 +109,12 @@ void GPIO_init()
     //
     //Set DACA_OUT to analog mode
     //
+    GPIO_setPinConfig(GPIO_231_GPIO231);
     SysCtl_setGPIOCAMSEL(231 , GPIOC_Analog_Mode);
     //
-    //Set DACA_OUT to analog mode
+    //Set DACB_OUT to analog mode
     //
+    GPIO_setPinConfig(GPIO_232_GPIO232);
     SysCtl_setGPIOCAMSEL(232 , GPIOC_Analog_Mode);
 }
 
@@ -176,6 +179,10 @@ void myDAC1_init(void)
     // Set DAC reference voltage.
     //
     DAC_setReferenceVoltage(myDAC1_BASE, DAC_REF_ADC_VREFHI);
+    //
+    // Enable DAC clock
+    //
+	RCC_AHB2PeriphClockCmd(DACC2_CLK_EN,ENABLE);
     //
     // Set DAC load mode.
     //
@@ -354,7 +361,7 @@ void myADC1_init()
 //
 //*****************************************************************************
 
-void main(void)
+int main(void)
 {
 	alb32r003x_evb_init();
     //
@@ -370,11 +377,30 @@ void main(void)
     myADC0_init();
     myADC1_init();
     uint16_t i = 0;
+    uint16_t idx;
+    int diff;
+
+    printf("DAC EX01 loopback test: sample %d points...\r\n", SIN_SAMPLE);
 
     //
-    // Continuously set the DAC output value
+    // Diagnostic: check DACC1/DACC2 clock enable bits and DAC write path
     //
-    while (1)
+    printf("diag: AHBENR2=0x%08X\r\n",
+            (unsigned int)HWREG(0x24004000U + 0x34U));
+    DAC_setShadowValue(myDAC0_BASE, 0x100U);
+    DAC_setShadowValue(myDAC1_BASE, 0x100U);
+    delay_ms(1);
+    printf("diag: after write 0x100 -> DAC_A active=0x%X DAC_B active=0x%X\r\n",
+            (unsigned int)DAC_getActiveValue(myDAC0_BASE),
+            (unsigned int)DAC_getActiveValue(myDAC1_BASE));
+    DAC_setShadowValue(myDAC0_BASE, 0U);
+    DAC_setShadowValue(myDAC1_BASE, 0U);
+    delay_ms(1);
+
+    //
+    // Set the DAC output value and verify the ADC sampling result for each point
+    //
+    for (idx = 0; idx < SIN_SAMPLE; idx++)
     {
         //
         // Set DAC1 output value - 0~4095 = 0V~VREFHI_VAL
@@ -430,30 +456,46 @@ void main(void)
         //
         ADC_clearInterruptStatus(myADC1_BASE, ADC_INT_NUMBER1);
         AdcResultIdx++;
-//        if(AdcResultIdx == 128)
-//        {
-//        	AdcResultIdx = 0;
-//            printf("-----ADCA0 Sample Value: -----\r\n");
-//            for(i = 0;i < 128;i++)
-//            {
-//                printf("ADCA0 = %d\r\n", ADCA0_Result[i]);
-//            }
-//            printf("-----ADCA1 Sample Value: -----\r\n");
-//            for(i = 0;i < 128;i++)
-//            {
-//                printf("ADCA1 = %d\r\n", ADCA1_Result[i]);
-//            }
-//            printf("-----ADCB15 Sample Value: -----\r\n");
-//            for(i = 0;i < 128;i++)
-//            {
-//                printf("ADCB15 = %d\r\n", ADCB15_Result[i]);
-//            }
-//            printf("-----ADCB7 Sample Value: -----\r\n");
-//            for(i = 0;i < 128;i++)
-//            {
-//                printf("ADCB7 = %d\r\n", ADCB7_Result[i]);
-//            }
-//        }
+
+        //
+        // Verify DACA_OUT loopback: ADC_A0 sample must match the DAC_A set value
+        //
+        diff = (int)ADCA0_Result[idx] - (int)DACA_Val;
+        if (diff < 0)
+        {
+            diff = -diff;
+        }
+        if (diff > (int)DAC_ADC_TOL)
+        {
+            printf("DAC loopback FAIL: point %u ADCA0=%u exp=%u err=%d\r\n",
+                    (unsigned int)idx, (unsigned int)ADCA0_Result[idx],
+                    (unsigned int)DACA_Val, diff);
+            printf("  dbg: DAC_A active=%u shadow=%u DAC_B active=%u shadow=%u ADCA1=%u ADCB15=%u ADCB7=%u\r\n",
+                    (unsigned int)DAC_getActiveValue(myDAC0_BASE),
+                    (unsigned int)DAC_getShadowValue(myDAC0_BASE),
+                    (unsigned int)DAC_getActiveValue(myDAC1_BASE),
+                    (unsigned int)DAC_getShadowValue(myDAC1_BASE),
+                    (unsigned int)ADCA1_Result[idx],
+                    (unsigned int)ADCB15_Result[idx],
+                    (unsigned int)ADCB7_Result[idx]);
+            return SC_FAIL;
+        }
+
+        //
+        // Verify DACB_OUT loopback: ADC_A1 sample must match the DAC_B set value
+        //
+        diff = (int)ADCA1_Result[idx] - (int)DACB_Val;
+        if (diff < 0)
+        {
+            diff = -diff;
+        }
+        if (diff > (int)DAC_ADC_TOL)
+        {
+            printf("DAC loopback FAIL: point %u ADCA1=%u exp=%u err=%d\r\n",
+                    (unsigned int)idx, (unsigned int)ADCA1_Result[idx],
+                    (unsigned int)DACB_Val, diff);
+            return SC_FAIL;
+        }
 
         //
         // DAC_A output value
@@ -471,6 +513,9 @@ void main(void)
         DACB_Val %= 4096;
 
     }
+
+    printf("DAC loopback PASS: %d points verified\r\n", (int)SIN_SAMPLE);
+    return SC_PASS;
 }
 
 //

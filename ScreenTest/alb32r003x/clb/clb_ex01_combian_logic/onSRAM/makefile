@@ -9,6 +9,7 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include src/subdir.mk
+-include scTest_drivers/subdir.mk
 -include Drivers/DriverLib/cpu/startup/subdir.mk
 -include Drivers/DriverLib/cpu/subdir.mk
 -include Drivers/DriverLib/subdir.mk
@@ -90,7 +91,7 @@ main-build: clb_ex01_combian_logic.elf secondary-outputs
 clb_ex01_combian_logic.elf: $(OBJS) $(USER_OBJS) makefile objects.mk $(OPTIONAL_TOOL_DEPS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GNU RISC-V Cross C++ Linker'
-	alb32-riscv-elf-g++ -march=rv32imafc_zba_zbb_zbc_zbs_xalbxf_xxldsp -mabi=ilp32f -mcmodel=medlow -mno-save-restore -O0 -ffunction-sections -fdata-sections -fno-common -g -gdwarf-2 -T "D:\Programs\ALBStudio_20260331_V1.0\ALBStudio\Packages\ALB32RT_SDK\Drivers\Devices\alb32r003x\gcc_alb32r003x_sram.ld" -nostartfiles -nodefaultlibs -Xlinker --gc-sections -Wl,-Map,"clb_ex01_combian_logic.map" -u _printf_float -u _scanf_float -Wl,--check-sections -Wl,--no-warn-rwx-segments -u _isatty -u _write -u _sbrk -u _read -u _close -u _fstat -u _lseek -u errno -o "clb_ex01_combian_logic.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	alb32-riscv-elf-g++ -march=rv32imafc_zba_zbb_zbc_zbs_xalbxf_xxldsp -mabi=ilp32f -mcmodel=medlow -mno-save-restore -O0 -ffunction-sections -fdata-sections -fno-common -g -gdwarf-2 -T "D:\ZVS_LAB\ALBStudio_IDE_202602-win64_0305_0313sdk\ALBStudio\Packages\ALB32RT_SDK\Drivers\Devices\alb32r003x\gcc_alb32r003x_sram.ld" -nostartfiles -nodefaultlibs -Xlinker --gc-sections -Wl,-Map,"clb_ex01_combian_logic.map" -u _printf_float -u _scanf_float -Wl,--check-sections -Wl,--no-warn-rwx-segments -u _isatty -u _write -u _sbrk -u _read -u _close -u _fstat -u _lseek -u errno -o "clb_ex01_combian_logic.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

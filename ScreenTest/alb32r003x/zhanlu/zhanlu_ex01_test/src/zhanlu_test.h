@@ -86,6 +86,6 @@ int test_naddcstf32(void);
 int test_nsubcstf32(void);
 int test_satf32(void);
 
-void zhanlu_test(void);
+int zhanlu_test(void);
 #endif
 

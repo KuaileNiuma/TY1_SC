@@ -109,7 +109,7 @@ int SCI_pc_verify(uint32_t SCI_base)
         if (send_data[i] != rcv_data[i])
         {
             printf("SCIBASE=0x%08x loopback test fail send_data %d rcv_data %d \r\n", SCI_base, send_data[i], rcv_data[i]);
-            return -1;
+            return SC_FAIL;
         }
     }
     printf("SCIBASE=0x%08X loopback test OK \r\n", SCI_base);

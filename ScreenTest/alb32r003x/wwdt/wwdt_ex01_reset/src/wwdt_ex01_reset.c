@@ -36,6 +36,8 @@
  
 #include "alb32r003x_evb.h"
 #include "alb32r003x_screenTest.h"
+#include "cpufeature.h"
+#include "system_cpu.h"
 
 
 typedef struct {
@@ -106,6 +108,12 @@ void wwdt_system_reset_test(void)
 //*****************************************************************************
 int main(void)
 {
+    uint64_t start_cycle;
+    uint64_t timeout_cycle;
+    uint32_t sys_clk;
+    uint32_t cur0;
+    uint32_t cur1;
+
 	alb32r003x_evb_init();
 
 
@@ -127,7 +135,42 @@ int main(void)
     wwdt_system_reset_test();
 
     //
-    // Infinite loop (will not be reached due to WWDT reset)
+    // Compute a CPU-cycle timeout in seconds
     //
-    return SC_PASS;
+    sys_clk = SystemClock_Get();
+    if (sys_clk == 0)
+    {
+        sys_clk = 180000000U;
+    }
+    timeout_cycle = 5ULL * sys_clk;
+
+    //
+    // Verify the WWDT counter is running: the current down-counter value is the
+    // T[6:0] field of the CR register. Read it twice; if it decreases, the
+    // watchdog is working and a system reset is imminent.
+    //
+    cur0 = HWREG(WWDG1_BASE + WWDG_O_CR) & WWDG_CR_T;
+    start_cycle = __get_rv_cycle();
+    while (1)
+    {
+        cur1 = HWREG(WWDG1_BASE + WWDG_O_CR) & WWDG_CR_T;
+        if (cur1 != cur0)
+        {
+            break;
+        }
+        if ((__get_rv_cycle() - start_cycle) > timeout_cycle)
+        {
+            printf("WWDT system reset test FAIL: counter is not running.\r\n");
+            return SC_FAIL;
+        }
+    }
+
+    if (cur1 < cur0)
+    {
+        printf("WWDT system reset test OK: counter running, system will be reset soon.\r\n");
+        return SC_PASS;
+    }
+
+    printf("WWDT system reset test FAIL.\r\n");
+    return SC_FAIL;
 }

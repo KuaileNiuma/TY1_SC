@@ -42,6 +42,7 @@
 #include "viterbi_decoder.h"
 #include "device.h"
 #include <stdio.h>
+#include "alb32r003x_screenTest.h"
 
 //*****************************************************************************
 //
@@ -221,5 +222,5 @@ int viterbi_test(void)
     {
         printf("PASS --decode_viterbi_K%dCR12\n", K);
     }
-    return 1;
+    return e_flag ? SC_FAIL : SC_PASS;
 }

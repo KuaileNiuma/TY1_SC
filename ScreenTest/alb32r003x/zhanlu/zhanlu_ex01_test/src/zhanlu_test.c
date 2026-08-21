@@ -40,6 +40,7 @@
 #include <string.h>
 #include "my_float.h"
 #include <stdlib.h>
+#include "alb32r003x_screenTest.h"
 
 uint16_t pass = 0, fail = 0;
 
@@ -735,7 +736,7 @@ static inline ThreeFloats_T __alb_hypf32(float din)
 
   return results;
 }
-void zhanlu_test(void)
+int zhanlu_test(void)
 {
     int result;
     int p_sum = 0;
@@ -1202,4 +1203,6 @@ void zhanlu_test(void)
         f_sum++;
     }
     printf("PASS:%d,FAIL:%d\n\r", p_sum, f_sum);
+
+    return (f_sum == 0) ? SC_PASS : SC_FAIL;
 }

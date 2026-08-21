@@ -39,6 +39,8 @@
 #include "wdt.h"
 #include "alb32r003x_evb.h"
 #include "alb32r003x_screenTest.h"
+#include "cpufeature.h"
+#include "system_cpu.h"
 //*****************************************************************************
 //
 // Global Variables
@@ -48,6 +50,8 @@ WDT_InitTypeDef myConfig = {0};    //!< WDT configuration structure
 WDT_TypeDef* mywdt_intstance;      //!< WDT instance pointer
 
 #define WDT_TEST_TIME        0x0C  //!< WDT test time value (if WDT clock is 20M, interrupt or reset after (2^(16+11)/2000000))
+#define WDT_FEED_TARGET      3U    //!< Target number of WDT interrupts to prove the interrupt feed path
+#define WDT_FEED_TIMEOUT_S   60U   //!< Timeout in seconds for the feed test
 uint32_t test_count = 0;           //!< Test counter for WDT interrupts
 
 //*****************************************************************************
@@ -145,7 +149,7 @@ void mywdt_init(void)
 // WDT watchdog test function
 //
 //*****************************************************************************
-void wdt_feed_test(void)
+void wdt_feed_start(void)
 {
     //
     // Initialize WDT with configuration
@@ -161,14 +165,6 @@ void wdt_feed_test(void)
     // Start WDT counter
     //
     WDT_start(WDT1_BASE);
-
-    //
-    // Infinite loop with small delays
-    //
-    while(1)
-    {
-        cpu_delay(100);
-    }
 }
 
 //*****************************************************************************
@@ -178,6 +174,9 @@ void wdt_feed_test(void)
 //*****************************************************************************
 int main(void)
 {
+    uint64_t start_cycle;
+    uint64_t timeout_cycle;
+    uint32_t sys_clk;
 
 	alb32r003x_evb_init();
     //
@@ -193,10 +192,32 @@ int main(void)
     //
     // Start WDT watchdog test
     //
-    wdt_feed_test();
+    wdt_feed_start();
 
     //
-    // Infinite loop (will not be reached)
+    // Compute a CPU-cycle timeout in seconds
     //
+    sys_clk = SystemClock_Get();
+    if (sys_clk == 0)
+    {
+        sys_clk = 180000000U;
+    }
+    timeout_cycle = (uint64_t)WDT_FEED_TIMEOUT_S * sys_clk;
+
+    //
+    // Wait until the WDT interrupt has fed the watchdog several times.
+    // This proves both the WDT interrupt and the feed path work.
+    //
+    start_cycle = __get_rv_cycle();
+    while (test_count < WDT_FEED_TARGET)
+    {
+        if ((__get_rv_cycle() - start_cycle) > timeout_cycle)
+        {
+            printf("WDT interrupt feed test FAIL: count=%u\r\n", (unsigned int)test_count);
+            return SC_FAIL;
+        }
+    }
+
+    printf("WDT interrupt feed test OK: count=%u\r\n", (unsigned int)test_count);
     return SC_PASS;
 }

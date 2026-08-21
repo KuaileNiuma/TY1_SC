@@ -37,6 +37,7 @@
 #include <stdio.h>
 #include "device.h"
 #include "alb32r003x_evb.h"
+#include "cpufeature.h"
 #include "alb32r003x_screenTest.h"
 
 //*****************************************************************************
@@ -49,6 +50,7 @@
 #define MY_TIMER_BASE     TIMER1_BASE                   //!< Timer base used
 #define MY_TIMER_CHANNEL  TIMER_CHANNEL1                //!< Timer channel used
 #define MY_TIMER_IRQ      TIMER1_C1_IRQn                //!< Timer IRQ used
+#define LPM_WAKE_TARGET   (4U)                          //!< Wake-up cycles required to pass
 
 //*****************************************************************************
 //
@@ -203,7 +205,12 @@ __INTERRUPT void XINT1ISR(void)
 //*****************************************************************************
 int main(void)
 {
-	uint32_t cnt = 0;  //!< Counter for wake-up cycles
+	uint32_t cnt = 0;            //!< Counter for wake-up cycles
+	uint32_t sys_clk;            //!< System clock frequency
+	uint32_t apbl_clk;           //!< APBL clock frequency
+	uint32_t clk_div;            //!< System clock / APBL clock ratio
+	uint64_t start_cycle;        //!< Cycle counter before entering sleep
+	uint64_t timeout_cycle;      //!< Wake-up timeout in CPU cycles
 
 	alb32r003x_evb_init();;
 	//
@@ -231,10 +238,23 @@ int main(void)
 	//
     Interrupt_register(XINT1_IRQn, XINT1ISR);
     Interrupt_enable(XINT1_IRQn);
+
+	//
+	// Compute a frequency-scaled wake-up timeout in CPU cycles.
+	// The timer wakes the CPU from shallow sleep once per TIMER_PERIOD; the
+	// timer clock is at most the APBL clock, so scale by SystemClock/APBL and
+	// keep a 20x margin. In deep sleep the CPU clock stops, so this timeout
+	// only guards the shallow-sleep phase.
+	//
+	sys_clk = SystemClock_Get();
+	apbl_clk = SystemClock_Get_APBL();
+	clk_div = (apbl_clk == 0) ? 1U : (sys_clk / apbl_clk);
+	timeout_cycle = (uint64_t)TIMER_PERIOD * clk_div * 20U;
+
 	//
 	// Main loop - enters sleep mode and waits for interrupts
 	//
-	while(1)
+	while(cnt < LPM_WAKE_TARGET)
 	{
 		//
 		// Log before entering sleep
@@ -256,9 +276,19 @@ int main(void)
 		}
 		
 		//
-		// Enter wait-for-interrupt state
+		// Enter wait-for-interrupt state and wait for wake-up
 		//
+		start_cycle = __get_rv_cycle();
 		__WFI();
+
+		//
+		// Check wake-up timeout
+		//
+		if ((__get_rv_cycle() - start_cycle) > timeout_cycle)
+		{
+			log_printf("LPM wake-up timeout FAIL.\r\n");
+			return SC_FAIL;
+		}
 		
 		//
 		// Increment counter and log after wake-up
@@ -267,4 +297,6 @@ int main(void)
 		log_printf("cpu suspends  cnt = %d after wfi....\r\n", cnt);
 	}
 
+	log_printf("LPM test PASS.\r\n");
+	return SC_PASS;
 }
